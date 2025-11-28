@@ -30,7 +30,7 @@ function AuditTrail({recid,pageid,showhide,fnShowAudit}) {
         },
       ];
 
-      const [audtModal, setAuditModal] = useState(false)
+    //   const [audtModal, setAuditModal] = useState(false)
       const [audit, setAudit] = useState([])
 
       useEffect(() => {
