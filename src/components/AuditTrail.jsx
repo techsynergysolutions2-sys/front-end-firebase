@@ -30,11 +30,9 @@ function AuditTrail({recid,pageid,showhide,fnShowAudit}) {
         },
       ];
 
-    //   const [audtModal, setAuditModal] = useState(false)
       const [audit, setAudit] = useState([])
 
       useEffect(() => {
-        setAuditModal(showhide)
         fnGetAudit()
       },[])
 
@@ -56,10 +54,6 @@ function AuditTrail({recid,pageid,showhide,fnShowAudit}) {
         } catch (error) {
             setAudit([])
         }
-      }
-
-      const fnOpenCloseModal = () =>{
-        setAuditModal(showhide)
       }
 
   return (
