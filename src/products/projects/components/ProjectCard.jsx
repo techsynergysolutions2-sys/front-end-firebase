@@ -14,7 +14,7 @@ function ProjectCard({task}) {
      const navigate = useNavigate()
     
     const fnViewTaskInfor = () => {
-        console.log(task)
+        
     }
 
     const fnNavProject = () => {

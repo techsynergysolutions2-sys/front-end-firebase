@@ -28,7 +28,6 @@ export default function CompanyProfile() {
   const [isExpired, setIsExpired] = useState(fnCheckExpiryDate)
 
   useEffect(() => {
-    // console.log(isModalOpenExpired)
     fetchData()
   },[])
 
@@ -55,7 +54,6 @@ export default function CompanyProfile() {
       }
       
     } catch (error) {
-      console.log(error)
     }
     
   };
@@ -82,8 +80,6 @@ export default function CompanyProfile() {
 
     let url = await fnFileURls(file)
 
-    console.log(file)
-    console.log(url[0])
     let values = {
       logourl: url[0].url
     }
@@ -163,7 +159,7 @@ export default function CompanyProfile() {
 
    const createOrder = async () => {
 
-    if(numSpace < 0){
+    if(numSpace <= 0){
       api.warning({
           title: ``,
           description: 'Please enter number of spaces',
@@ -186,15 +182,17 @@ export default function CompanyProfile() {
     totalMonths = -1 * totalMonths
 
     try {
+      let temp = amou * employees.length
+      let temp2 = (amou * numSpace) * monthsDiff
       if(isModalOpenExpired){
         const res = await axios.post(`${url}/space`, {
-        amount: (amou * employees.length),
+        amount: temp,
         action: 'orders'
       });
       return res.data.id;
       }else{
         const res = await axios.post(`${url}/space`, {
-        amount: (amou * numSpace) * totalMonths,
+        amount: temp2,
         action: 'orders'
       });
       return res.data.id;

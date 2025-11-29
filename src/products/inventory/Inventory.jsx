@@ -2,10 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
-import { Input,Button } from 'antd';
+import { Input,Button,Skeleton } from 'antd';
 import {useNavigate } from 'react-router-dom'
 import {fnGetDirectData} from '../../shared/shared'
 import './inventory.css';
+
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Inventory = () => {
 
@@ -14,6 +17,7 @@ const Inventory = () => {
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         
@@ -22,7 +26,6 @@ const Inventory = () => {
 
     const fnFetchData = async () => {
         var companyid = sessionStorage.getItem('companyid')
-        var uid = sessionStorage.getItem('uid')
         let sql = `
             SELECT p.*, COALESCE(COUNT(DISTINCT op.orderid), 0) AS total_orders
             FROM products p
@@ -35,9 +38,9 @@ const Inventory = () => {
         const data = await fnGetDirectData('products',sql);
         setProducts(data);
         setFilteredProducts(data)
-        // setLoading(!loading)
+        setLoading(!loading)
         } catch (error) {
-        console.log(error)
+        
         }
     };
 
@@ -66,43 +69,57 @@ const Inventory = () => {
     setFilteredProducts(products.filter(p => p.title.toLowerCase().includes(e.toLowerCase())))
   }
 
-  return (
-    <div className="all-products-page" style={{width: '100%', height: '98%',overflowY: 'scroll',scrollbarWidth: 'none'}}>
-      <div className="container">
-        <h1 className="page-title">All Products</h1>
-        
-        <div className="products-header">
-          <h2>Products ({filteredProducts.length})</h2>
-          <div className="inventory">
-            <Input.Search placeholder="search" onChange={(e) => fnHandleSearch(e.target.value)} size="large"/>
-          </div>
-          {/* <Link className="btn btn-primary" onClick={() => fnNavProduct({})}>
-            <i className="fas fa-plus"></i> Add Product
-          </Link> */}
-          <Button type="primary" onClick={() => fnNavProduct({})} size="large">Add Product</Button>
-        </div>
+  const handleClose = () => {
+    setLoading(!loading)
+  };
 
-        <div className="products-grid">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                loaddata={fnFetchData}
-              />
-            ))
-          ) : (
-            <div className="no-products">
-              <i className="fas fa-box-open"></i>
-              <h3>No products found</h3>
-              <p>Add product!</p>
+  return (
+    <>
+      {
+        loading ? (
+          <Skeleton active style={{marginTop: 20, marginLeft: 20}}/>
+        ):(
+          <div className="all-products-page" style={{width: '100%', height: '98%',overflowY: 'scroll',scrollbarWidth: 'none'}}>
+            <div className="container">
+              <h1 className="page-title">All Products</h1>
+              
+              <div className="products-header">
+                <h2>Products ({filteredProducts.length})</h2>
+                <div className="inventory">
+                  <Input.Search placeholder="search" onChange={(e) => fnHandleSearch(e.target.value)} size="large"/>
+                </div>
+                {/* <Link className="btn btn-primary" onClick={() => fnNavProduct({})}>
+                  <i className="fas fa-plus"></i> Add Product
+                </Link> */}
+                <Button type="primary" onClick={() => fnNavProduct({})} size="large">Add Product</Button>
+              </div>
+
+              <div className="products-grid">
+                {filteredProducts.length > 0 ? (
+                  filteredProducts.map(product => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      onEdit={handleEdit}
+                      onDelete={handleDelete}
+                      loaddata={fnFetchData}
+                    />
+                  ))
+                ) : (
+                  <div className="no-products">
+                    <i className="fas fa-box-open"></i>
+                    <h3>No products found</h3>
+                    <p>Add product!</p>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
-      </div>
-    </div>
+          </div>
+        )
+      }
+      
+    </>
+    
   );
 };
 

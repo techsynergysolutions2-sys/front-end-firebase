@@ -53,7 +53,6 @@ function Task() {
     } catch (error) {
       setEmployees([])
       setProjects([])
-      console.log(error)
     }
 
     if(JSON.stringify(task) != "{}"){

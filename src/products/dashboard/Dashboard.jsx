@@ -51,14 +51,13 @@ const Dashboard = () => {
         const data = await fnGetDirectData('dashboard',sql_indicators);
         const data2 = await fnGetDirectData('dashboardlinechart',sql_line);
 
-        console.log(data2)
 
         setRevenue(data[0].total_revenue)
         setInventory(data[0].total_inventory)
         setOrders(data[0].total_orders)
         setTotalPending(data[0].pending_orders)
       } catch (error) {
-      console.log(error)
+      
       }
   };
 

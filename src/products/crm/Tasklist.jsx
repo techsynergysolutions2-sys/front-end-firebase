@@ -101,7 +101,6 @@ export default function Tasks() {
         setFilteredTask(data)
         setLoading(!loading)
       } catch (error) {
-        // console.log(error)
       }
     };
     

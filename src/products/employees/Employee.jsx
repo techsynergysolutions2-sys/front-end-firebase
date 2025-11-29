@@ -322,7 +322,6 @@ function Employee() {
         }
         await fnCreateData('skills',"skills", obj, 'new');
       } catch (error) {
-        console.log(error)
       }
     }
   }
@@ -367,7 +366,6 @@ function Employee() {
         const data = await fnUpateData('skills',"skills", values,'id = ?',[record['id']], 'update');
         // alert('Skill deleted')
       } catch (error) {
-          // console.log(error)
       }
     }
     
@@ -411,7 +409,7 @@ function Employee() {
           });
       }
     } catch (error) {
-        // console.log(error)
+        
     }
   };
 

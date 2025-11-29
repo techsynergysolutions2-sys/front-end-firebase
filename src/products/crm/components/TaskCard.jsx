@@ -4,7 +4,7 @@ import {Col, Row,Typography} from 'antd';
 function TaskCard({task}) {
 
   const fnViewTaskInfor = () => {
-    console.log(task)
+    
   }
 
   return (

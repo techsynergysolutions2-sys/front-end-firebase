@@ -60,70 +60,23 @@ function Profile() {
     setEmployee(data[0]);
     setPhotoUrl(data[0].photourl)
     } catch (error) {
-        console.log(error)
+        
     }
 
   }
 
   const onFinish = async (values) => {
-    console.log('checking 0')
+    
     try {
-      console.log('checking 1')
+      
       delete values['password']
       const data = await fnUpateData('employees',"employees", values,'id = ? AND isactive = ?',[employee['id'],1], 'update');
-      console.log(data) 
+      
       
     } catch (error) {
-      console.log(error)
+     
     }
 
-    // var actionStr = sessionStorage.getItem('actionStr')
-    // try {
-    //   createUserWithEmailAndPassword(auth, values['email'], values['password'])
-    //   .then((userCredential) => {
-    //     // Signed up 
-    //     const user = userCredential.user;
-    //     console.log(user.uid)
-    //     updateProfile(user, {
-    //       displayName: `${values['firstname']} ${values['lastname']}`
-    //     }).then(async() => {
-    //         var companyid = sessionStorage.getItem('companyid')
-    //         delete values.password
-    
-    //         values['companyid'] = companyid
-    //         values['skills'] = skills
-    //         values['isactive'] = 1
-    //         values['createddate'] = new Date().toISOString().slice(0, 16)
-    //         // values['lastpaid'] = new Date().toISOString().slice(0, 16) 
-    //         const data = await fnCreateData('employees',"employees", values, 'new');
-    //         if(data.insertId != null || data.insertId != undefined){
-    //           fnGoBack()
-    //         }else{
-    //           console.log('Something went wrong')
-    //         }
-    //         // const docId = await fnAddDocument("users", values);
-    //         //  if (docId == null){
-    //         //   alert('Something went wrong. Please try again')
-    //         //  }else{
-              
-    //         //  }
-    //         //  fnGoBack()
-    //     }).catch((error) => {
-    //       console.error("Error updating display name:", error);
-    //     });
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     // setLoading(false)
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorCode)
-    //     alert(errorMessage)
-    //   });
-    // } catch (error) {
-    //   // setLoading(false)
-    //   console.log(error)
-    // }
   };
 
   const fnGoBack = () => {
@@ -312,7 +265,7 @@ function Profile() {
         setPhotoUrl(url[0].url)
         sessionStorage.setItem('photourl',url[0].url)
       } catch (error) {
-          console.log(error)
+         
       }
   };
 
@@ -335,7 +288,7 @@ function Profile() {
       const data = await fnUpateData('employees',"employees", values,'id = ?',[employee['id']], 'update');
       alert('Password update')
     } catch (error) {
-        console.log(error)
+        
     }
   };
 

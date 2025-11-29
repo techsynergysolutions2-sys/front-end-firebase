@@ -10,18 +10,6 @@ import {url,fnCreateData,amou} from '../shared/shared'
 import axios from 'axios';
 
 
-const props = {
-  beforeUpload: file => {
-    const isPNG = file.type === 'image/png';
-    if (!isPNG) {
-      message.error(`${file.name} is not a png file`);
-    }
-    return isPNG || Upload.LIST_IGNORE;
-  },
-  onChange: info => {
-    console.log(info.fileList);
-  },
-};
 
 const steps = [
   {
@@ -90,22 +78,17 @@ function Register() {
 
       fnCreateAuth()
       .then( async(result) => {
-        console.log("User created successfully:", result);
         setCurrent(current + 1);
       })
       .catch((error) => {
-        console.error("User creation failed:", error);
-        // show error message
       });
 
     }
-
-    console.log('Success:', values);
     
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+   
   };
 
   const prev = () => {
@@ -125,7 +108,6 @@ function Register() {
       );
 
       const user = userCredential.user;
-      // console.log(user.uid);
 
       // Update display name
       await updateProfile(user, {
@@ -133,7 +115,6 @@ function Register() {
       });
 
       // Create employee data
-      // console.log(member)
       
       // Create company data
       company['isactive'] = 0;
@@ -163,12 +144,10 @@ function Register() {
           companyId: data2.insertId
         });
       } else {
-        console.log('Something went wrong');
         reject(new Error('Data creation failed'));
       }
 
     } catch (error) {
-      console.error(error);
       alert(error.message);
       reject(error);
     } finally {
@@ -194,11 +173,9 @@ function Register() {
       })
       .catch((error) => {
         setLoading(false)
-        console.error("Error adding document: ", error);
       });
     } catch (error) {
       setLoading(false)
-      console.log(error)
     }
   }
 
@@ -212,7 +189,7 @@ function Register() {
     member['lastpaid'] = Timestamp.now() 
     var dob = member['dob']?.toDate()
     member['dob'] = Timestamp.fromDate(dob)
-    console.log(member)
+   
     try {
       addDoc(collection(db, 'users'), member)
       .then((docRef) => {
@@ -221,11 +198,9 @@ function Register() {
       })
       .catch((error) => {
         setLoading(false)
-        console.error("Error adding document: ", error);
       });
     } catch (error) {
       setLoading(false)
-      console.log(error)
     }
   }
 
@@ -238,14 +213,12 @@ function Register() {
         });
         return res.data.id;
       } catch (err) {
-        console.error(err);
         setErrorMessage("Could not create PayPal order");
       }
     
   };
 
   const onApprove = async (data) => {
-    console.log('onApprove')
 
     try {
       const res = await axios.post(
@@ -256,7 +229,6 @@ function Register() {
         fnNavLogin()
       }
     } catch (err) {
-      console.error(err);
       setErrorMessage("Payment failed");
     }
   };

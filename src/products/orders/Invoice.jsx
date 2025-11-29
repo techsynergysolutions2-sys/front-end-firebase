@@ -29,7 +29,7 @@ const Invoice = () => {
         setCompany(data[0])
         setTotal( Math.round(order.order_total * 100) / 100)
       } catch (error) {
-        // console.log(error)
+        
       }
       
     }

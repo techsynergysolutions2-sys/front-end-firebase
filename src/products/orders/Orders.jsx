@@ -98,7 +98,7 @@ const Orders = () => {
       }
       // setLoading(!loading)
       } catch (error) {
-      // console.log(error)
+      
       }
   };
 

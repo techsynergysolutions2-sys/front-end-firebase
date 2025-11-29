@@ -42,7 +42,7 @@ const LeaveForm = () => {
       setEmployees(data)
     } catch (error) {
       setEmployees([])
-      // console.log(error)
+      
     }
     
   }

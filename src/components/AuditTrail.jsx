@@ -16,10 +16,8 @@ function AuditTrail({recid,pageid,showhide,fnShowAudit}) {
         {
             title: 'Date',
             render: (record) => {
-                // console.log(record.createddate)
+                
                 const localDate = new Date(record.createddate);
-                // console.log(localDate)
-                // console.log(localDate.toLocaleString("en-ZA"))
                 return(
                      <>
                         {/* {record.createddate?.replace('T', ' ')} */}

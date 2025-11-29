@@ -181,7 +181,7 @@ function Project() {
   ];
 
   const fnCreateUpdateTask = () => {
-    console.log("New task created")
+   
   }
 
   const onFinish = (values) => {
@@ -196,7 +196,7 @@ function Project() {
           values['createdby'] = sessionStorage.getItem('uid')
           const data = await fnCreateData('projects',"projects", values, 'new');
           if(data.insertId != null || data.insertId != undefined){
-            console.log('success')
+            
             let temp = values
             temp['id'] = data.insertId
             setProject(temp)
@@ -289,7 +289,7 @@ function Project() {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    
   };
 
   const fnCancelInviteModal = () => {
@@ -336,7 +336,7 @@ function Project() {
         setInvitedUsers((prevUsers) => prevUsers.filter((user) => user.id !== record.id));
         setInvitedUsersUID((idxs) => idxs.filter((id) => id !== record.id));
       }
-      console.log(data)
+      
     } catch (error) {
       
     }

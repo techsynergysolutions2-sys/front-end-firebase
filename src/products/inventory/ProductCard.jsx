@@ -74,7 +74,7 @@ const ProductCard = ({ product,loaddata }) => {
         const data = await fnUpateData('products',"products", values,'id = ? AND isactive = ?',[record,1], 'update');
         loaddata()
     } catch (error) {
-        console.log(error)
+       
     }
   }
 

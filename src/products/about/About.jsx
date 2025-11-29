@@ -325,7 +325,6 @@ export default function AboutPage() {
               enhance productivity, and create meaningful customer connections.
             </p>
             <h1 className="hero-title">For only $4.99pm per user</h1>
-            <h1 className="hero-title">For only $4.99pm per user</h1>
             <Award size={60} className="mt-4" style={{ opacity: 0.9 }} />
           </div>
         </div>

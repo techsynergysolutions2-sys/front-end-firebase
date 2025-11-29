@@ -27,19 +27,30 @@ const fnLogin = () => {
   var permissions = sessionStorage.getItem('permissions')
   var groupid = sessionStorage.getItem('groupid')
 
-  if(uid == undefined || uid == null || uid == ''){
+  console.log(companyid)
+  console.log(uid)
+  console.log(permissions)
+  console.log(groupid)
+
+  console.log(uid == null)
+
+  if( uid == null ){
+    console.log('Check 1')
     return false
   }
 
-  if(companyid == undefined || companyid == null || companyid == ''){
+  if(companyid === null){
+    console.log('Check 2')
     return false
   }
 
-  if(permissions == undefined || permissions == null || permissions == ''){
+  if(permissions == null){
+    console.log('Check 3')
     return false
   }
 
-  if(groupid == undefined || groupid == null || groupid == ''){
+  if(groupid == null){
+    console.log('Check 4')
     return false
   }
 
@@ -75,6 +86,9 @@ const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg", "application/pdf"
 // export const url = 'http://192.168.0.6:5000'
 // export const url = 'http://ec2-13-60-191-59.eu-north-1.compute.amazonaws.com:5000'
 export const url = 'https://app-ihcagnmida-uc.a.run.app'
+
+// export const host_url = 'https://Ebencrm.com'
+export const host_url = 'http://localhost:3000'
 
 export const amou = 4.99
 
@@ -389,30 +403,30 @@ export const fnConnectNavigation = (permissions) =>{
       getItem(0,'Profile', '/profile', <Avatar size='default' src={sessionStorage.getItem('photourl')} />,),
       getItem(100,'Log out', '/login', <LockOutlined />)
     ]
-
-    if(fnLogin() == false){
-      window.location.replace("http://Ebencrm.com/login");
+    let temp = fnLogin()
+    if(temp == false){
+      window.location.replace(`${host_url}/login`);
       return
     }
 
     if(fnCheckExpiryDate == true ){
       if(sessionStorage.getItem('grouptitle') == 'Administrator'){
-          window.location.href = "http://Ebencrm.com/companyprofile";
+          window.location.href = `${host_url}/companyprofile`;
       }else{
-        window.location.replace("http://Ebencrm.com/login");
+        window.location.replace(`${host_url}/login`);
         return
       }
     }
   
     if(sessionStorage.getItem('grouptitle') != 'Administrator'){
-      console.log('Check 1')
+      
       let st = '' 
       st = sessionStorage.getItem('permissions')
       let arr = st.split(',').map(Number)
-      console.log(arr)
+     
       pages = pages.filter(page => arr.includes(page.id));
     }else if(sessionStorage.getItem('grouptitle') == 'Administrator'){
-      console.log('Check 2')
+      
       pages = pages
     }
     
@@ -435,7 +449,7 @@ export async function fnGetData(api,tablename, where, cols) {
     const response = await axios.post(`${url}/${api}`, {tablename: tablename, where: where, columns: cols, action: 'select' });
     return response.data;  // ✅ return the data
   } catch (error) {
-    console.error("Error fetching filtered data:", error);
+    
     throw error;  // rethrow if you want caller to handle errors
   }
 }
@@ -445,7 +459,7 @@ export async function fnGetDirectData(api,sql) {
     const response = await axios.post(`${url}/${api}`, {sql: sql, action: 'select' });
     return response.data;  // ✅ return the data
   } catch (error) {
-    console.error("Error fetching filtered data:", error);
+   
     throw error;  // rethrow if you want caller to handle errors
   }
 }
@@ -455,7 +469,7 @@ export async function fnCreateData(api,tablename, data,action) {
     const response = await axios.post(`${url}/${api}`, {tablename: tablename, data: data, action: action });
     return response.data;  // ✅ return the data
   } catch (error) {
-    console.error("Error fetching filtered data:", error);
+    
     throw error;  // rethrow if you want caller to handle errors
   }
 }
@@ -465,7 +479,7 @@ export async function fnUpateData(api,tablename, data,whereCondition,whereValues
     const response = await axios.post(`${url}/${api}`, {tablename: tablename, data: data, whereCondition: whereCondition,whereValues:whereValues, action: action });
     return response.data;  // ✅ return the data
   } catch (error) {
-    console.error("Error fetching filtered data:", error);
+    
     throw error;  // rethrow if you want caller to handle errors
   }
 }
@@ -553,7 +567,7 @@ export const fnUpdateUserLoginDetails = async (email,password) => {
     return { success: true, message: "User details updated successfully" };
 
   } catch (error) {
-    console.error(error);
+    
     return { success: false, message: error.message };
   }
 };
@@ -585,7 +599,7 @@ export async function fnGetFilteredData(collectionName, filters = []) {
 
     return data;
   } catch (error) {
-    console.error("Error fetching filtered data:", error);
+    
     return [];
   }
 }
@@ -594,11 +608,11 @@ export const fnAddDocument = async (collectionName, data) => {
   try {
     const db = getFirestore();
     const docRef = await addDoc(collection(db, collectionName), data);
-    console.log("Document written with ID:", docRef.id);
+    
     fnUpdateDocumentOnAdd(collectionName,docRef.id,db)
     return docRef.id;
   } catch (error) {
-    console.error("Error adding document:", error);
+    
     return null;
   }
 };
@@ -608,9 +622,9 @@ const fnUpdateDocumentOnAdd = async (collectionName, docId,db) => {
   try {
     const docRef = doc(db, collectionName, docId);
     await updateDoc(docRef, value);
-    console.log("Document updated successfully!");
+    
   } catch (error) {
-    console.error("Error updating document:", error);
+    
   }
 };
 
@@ -632,17 +646,17 @@ export const fnFindAndUpdateDocumentWithMultipleFields = async (
     const snapshot = await getDocs(q);
 
     if (snapshot.empty) {
-      console.log("No matching documents found.");
+      
       return null;
     }
 
     // Update the first matching document
     const docRef = snapshot.docs[0].ref;
     await updateDoc(docRef, updatedData);
-    console.log("Document updated with ID:", docRef.id);
+    
     return docRef.id;
   } catch (error) {
-    console.error("Error updating document:", error);
+    
     return null;
   }
 };

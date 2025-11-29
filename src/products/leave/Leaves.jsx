@@ -55,7 +55,7 @@ const Leaves = () => {
         setFilteredLeaves(data);
       }
       } catch (error) {
-      // console.log(error)
+      
       }
   };
 

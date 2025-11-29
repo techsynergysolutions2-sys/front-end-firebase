@@ -91,6 +91,7 @@ export default function Projects() {
 
   useEffect(() =>{
     const fetchClients = async () => {
+     
       var companyid = sessionStorage.getItem('companyid')
 
       let sql = `
@@ -159,7 +160,7 @@ export default function Projects() {
         setFilteredProjects(data)
         setLoading(!loading)
       } catch (error) {
-        console.log(error)
+        
       }
     };
     

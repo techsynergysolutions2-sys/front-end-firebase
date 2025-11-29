@@ -41,7 +41,7 @@ function Employees() {
         let temp = data2[0].employee_count - data.length
         setCount(temp)
       } catch (error) {
-        console.log(error)
+        
       }
       
     };

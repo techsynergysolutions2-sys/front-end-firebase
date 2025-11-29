@@ -51,7 +51,7 @@ const Tickets = () => {
         setFilteredTickets(data);
       }
       } catch (error) {
-      // console.log(error)
+      
       }
   };
 

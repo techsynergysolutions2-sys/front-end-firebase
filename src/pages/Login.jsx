@@ -1,9 +1,12 @@
-import React,{useEffect,useMemo} from 'react';
+import React,{useEffect,useMemo,useState} from 'react';
 import { Button, Checkbox, Form, Input,Card,Row,Typography,notification } from 'antd';
 import {useNavigate, Outlet } from 'react-router-dom'
 import {auth } from '../shared/firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {  fnGetData,fnGetDirectData,fnCheckExpiryDate } from '../shared/shared';
+import {  fnGetData,fnGetDirectData,fnCheckExpiryDate,host_url } from '../shared/shared';
+
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { useStateValue } from '../data/StateProvider';
 
@@ -13,6 +16,7 @@ let placement = 'topRight'
 function Login(){
 
     const [api, contextHolder] = notification.useNotification();
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate();
     const [{}, dispatch] = useStateValue();
@@ -22,22 +26,26 @@ function Login(){
     }
 
     useEffect(() => {
-        sessionStorage.setItem('companyid',null)
-        sessionStorage.setItem('department',null)
-        sessionStorage.setItem('photourl',null)
-        sessionStorage.setItem('firstname',null)
-        sessionStorage.setItem('lastname',null)
-        sessionStorage.setItem('email',null)
-        sessionStorage.setItem('uid',null)
+        
+        sessionStorage.removeItem('companyid')
+        sessionStorage.removeItem('department')
+        sessionStorage.removeItem('photourl')
+        sessionStorage.removeItem('firstname')
+        sessionStorage.removeItem('lastname')
+        sessionStorage.removeItem('email')
+        sessionStorage.removeItem('uid')
+        sessionStorage.removeItem('permissions')
+        sessionStorage.removeItem('groupid')
+
     },[])
 
     const onFinish = async values => {
-
+        setLoading(true)
         try {
             const data = await fnGetData('login',"", {email: values['username'], password: values['password']}, { columns: '*'});
-            console.log(data)
+           
             if(data.code == 200){
-                console.log('check 0')
+               
                 let sq = `
                     SELECT e.id,e.firstname,e.lastname,e.email,e.companyid,e.department,e.groupid,e.photourl, c.expirydate,ug.title
                     FROM employees e
@@ -51,7 +59,7 @@ function Login(){
                 try {
                     const data2 = await fnGetDirectData('employees',sq);
                     if(data2.length > 0){
-                        console.log('check 2')
+                        
                         let sql = `
                                 SELECT gp.*,ug.title 
                                 FROM group_permissions gp
@@ -60,6 +68,7 @@ function Login(){
                                 WHERE gp.companyid = ${data2[0].companyid} AND groupid = ${data2[0].groupid}
                                 `
                         const data3 = await fnGetDirectData('orders',sql);
+                        setLoading(false)
                         sessionStorage.setItem('companyid',data2[0].companyid)
                         sessionStorage.setItem('department',data2[0].department)
                         sessionStorage.setItem('photourl',data2[0].photourl)
@@ -71,7 +80,7 @@ function Login(){
                         sessionStorage.setItem('grouptitle',data2[0].title)
                         let groupid = data2[0].groupid
                         let groupidtitle = data2[0].title
-                        console.log(fnCheckExpiryDate())
+                       
                         if(fnCheckExpiryDate()){
                             if(groupidtitle != 'Administrator'){
                                 api.warning({
@@ -99,15 +108,31 @@ function Login(){
                         }
                         
                     }else{
-                        alert('Incorrect username or password')
+                        setLoading(false)
+                        api.warning({
+                            title: ``,
+                            description: 'Incorrect username or password',
+                            placement,duration: 6,
+                            style: {
+                            background: "#e2e2e2ff"
+                            },
+                        });
                     }
                 } catch (error) {
-                    console.log(error)
+                    
                 }
 
 
             }else{
-                alert('Invalid email or password')
+                setLoading(false)
+                api.warning({
+                    title: ``,
+                    description: 'Incorrect username or password',
+                    placement,duration: 6,
+                    style: {
+                    background: "#e2e2e2ff"
+                    },
+                });
             }
         } catch (error) {
             
@@ -115,7 +140,7 @@ function Login(){
 
       };
       const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
+        
       };
 
     const contextValue = useMemo(() => ({ name: 'Ant Design' }), []);
@@ -123,7 +148,7 @@ function Login(){
     return(
         <Context.Provider value={contextValue}>
         {contextHolder}
-        <Row justify="center" align="middle" style={{height: "100vh"}}>
+        {/* <Row justify="center" align="middle" style={{height: "100vh"}}>
         <Card style={{ width: 600, boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)" }}>
             <Typography style={{textAlign: 'center', fontFamily: "'Poppins', sans-serif", fontSize: 28, fontWeight: 600, marginBottom: 15}}>Eben CRM</Typography>
             <Form
@@ -151,10 +176,6 @@ function Login(){
             <Input.Password />
             </Form.Item>
 
-            {/* <Form.Item name="remember" valuePropName="checked" label={null}>
-            <Checkbox>Remember me</Checkbox>
-            </Form.Item> */}
-
             <Form.Item label={null}>
             <Button type="primary" htmlType="submit">
                 Login
@@ -165,9 +186,54 @@ function Login(){
             </Form.Item>
             </Form>
         </Card>
-    </Row>
+        </Row> */}
+
+        <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
+            <div className="card shadow p-4" style={{ maxWidth: "420px", width: "100%", borderRadius: "1.5rem" }}>
+            <h3 className="text-center mb-3 fw-bold">Welcome Back</h3>
+            <p className="text-center text-muted mb-4">Login to continue to your dashboard</p>
+
+
+            <Form
+                name="basic"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                style={{ maxWidth: 600 }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                layout="vertical"
+            >
+                <div className="mb-3">
+                    <label className="form-label fw-semibold">Email address</label>
+                    <Form.Item layout="vertical" name="username" rules={[{ required: true, message: 'Please input your username!' }]} >
+                        <input className="form-control p-3" />
+                    </Form.Item>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="password" className="form-label fw-semibold">Password</label>
+                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+                        <input type="password" className="form-control p-3"/>
+                    </Form.Item>
+                </div>
+
+                <button type="submit" className="btn btn-primary w-100 p-3 fw-semibold">Login</button>
+            </Form>
+
+            <Backdrop sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })} open={loading}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+
+
+            <div className="text-center mt-4">
+                <p className="mb-0">Don't have an account? <a onClick={() => fnNavRegister()} className="fw-semibold" style={{}}> Sign up</a></p>
+            </div>
+            </div>
+        </div>
     </Context.Provider>
     )
 };
+
 
 export default Login;

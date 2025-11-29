@@ -110,7 +110,6 @@ function Department() {
     
         fnSendData()
         
-        console.log('Success:', values);
     };
     
     const onFinishFailed = (errorInfo) => {

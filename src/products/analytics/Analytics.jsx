@@ -100,7 +100,6 @@ const Analytics = () => {
           setRecentOrders(data4)
 
         } catch (error) {
-        // console.log(error)
         }
     };
 
