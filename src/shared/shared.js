@@ -78,7 +78,8 @@ const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg", "application/pdf"
 // Live
 export const url = 'https://app-ihcagnmida-uc.a.run.app'
 // export const host_url = 'https://Ebencrm.com'
-export const host_url = 'crm-solutions-34e5f.firebaseapp.com'
+// export const host_url = 'crm-solutions-34e5f.firebaseapp.com'
+export const host_url = 'crm-solutions-34e5f.web.app'
 
 
 //Testing
