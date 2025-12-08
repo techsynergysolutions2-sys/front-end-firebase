@@ -7,7 +7,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Techsynergy Solutions
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API, 
+  apiKey: process.env.REACT_APP_FIREBASE_API, 
   authDomain: "crm-solutions-34e5f.firebaseapp.com",
   projectId: "crm-solutions-34e5f",
   storageBucket: "crm-solutions-34e5f.firebasestorage.app",
