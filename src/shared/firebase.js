@@ -7,7 +7,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Techsynergy Solutions
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_PAYPAL_CLIENT_ID,
+  apiKey: process.env.FIREBASE_API, 
   authDomain: "crm-solutions-34e5f.firebaseapp.com",
   projectId: "crm-solutions-34e5f",
   storageBucket: "crm-solutions-34e5f.firebasestorage.app",
