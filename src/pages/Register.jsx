@@ -202,7 +202,7 @@ function Register() {
     console.log(ttl)
     try {
         const res = await axios.post(`${url}/payments`, {
-          amount: ttl, // you can make this dynamic
+          totalamount: ttl, // you can make this dynamic
           action: 'orders'
         });
         return res.data.id;
