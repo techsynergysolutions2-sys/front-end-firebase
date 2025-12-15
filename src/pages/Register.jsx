@@ -204,7 +204,11 @@ function Register() {
         const res = await axios.post(`${url}/payments`, {
           totalamount: ttl, // you can make this dynamic
           action: 'orders'
-        });
+        },{
+        headers: {
+          'Content-Type': 'application/json',  // Explicitly set JSON
+        }
+    });
         return res.data.id;
       } catch (err) {
         setErrorMessage("Could not create PayPal order");
