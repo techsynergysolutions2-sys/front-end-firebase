@@ -462,8 +462,8 @@ function Register() {
                 <Typography style={{textAlign: 'center', fontFamily: "'Poppins', sans-serif", fontSize: 28, fontWeight: 600, marginBottom: 15}}>Payment</Typography>
                 
                 <Descriptions bordered title="Payment" items={paymentitems} />
-                <Button onClick={() => createOrder()}>Testing</Button>
-                {/* <PayPalScriptProvider
+                {/* <Button onClick={() => createOrder()}>Testing</Button> */}
+                <PayPalScriptProvider
                   options={{
                     "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
                     currency: "USD",
@@ -479,7 +479,7 @@ function Register() {
                       setErrorMessage("An error occurred during payment.");
                     }}
                   />
-                </PayPalScriptProvider> */}
+                </PayPalScriptProvider>
                 <Row justify="center">
                     <div style={{ marginTop: 24 }}>
                       {current < steps.length - 1 && (
