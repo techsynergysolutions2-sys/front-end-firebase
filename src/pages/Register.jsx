@@ -6,7 +6,7 @@ import { db,auth } from '../shared/firebase';
 import {createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 import { collection, addDoc,Timestamp  } from 'firebase/firestore';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import {url,fnCreateData,amou} from '../shared/shared'
+import {url,fnCreateData,amou,fnGetDirectData} from '../shared/shared'
 import axios from 'axios';
 
 
@@ -202,13 +202,10 @@ function Register() {
     console.log(ttl)
     try {
         const res = await axios.post(`${url}/payments`, {
-          totalamount: ttl, // you can make this dynamic
+          employees: 2, 
           action: 'orders'
-        },{
-        headers: {
-          'Content-Type': 'application/json',  // Explicitly set JSON
-        }
-    });
+        });
+        console.log(res.data.id)
         return res.data.id;
       } catch (err) {
         setErrorMessage("Could not create PayPal order");
@@ -465,7 +462,8 @@ function Register() {
                 <Typography style={{textAlign: 'center', fontFamily: "'Poppins', sans-serif", fontSize: 28, fontWeight: 600, marginBottom: 15}}>Payment</Typography>
                 
                 <Descriptions bordered title="Payment" items={paymentitems} />
-                <PayPalScriptProvider
+                <Button onClick={() => createOrder()}>Testing</Button>
+                {/* <PayPalScriptProvider
                   options={{
                     "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
                     currency: "USD",
@@ -481,7 +479,7 @@ function Register() {
                       setErrorMessage("An error occurred during payment.");
                     }}
                   />
-                </PayPalScriptProvider>
+                </PayPalScriptProvider> */}
                 <Row justify="center">
                     <div style={{ marginTop: 24 }}>
                       {current < steps.length - 1 && (
