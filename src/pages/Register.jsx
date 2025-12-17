@@ -57,7 +57,7 @@ function Register() {
       setCurrent(current + 1);
     }else if('companyname' in values){
       setCompany(values)
-      var total = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format((values['employee_count'] * amou) * 12) 
+      var total = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format((values['employee_count'] * amou) * 1) 
       var itms = [
         {
           label: 'Number of employees',
@@ -198,7 +198,7 @@ function Register() {
   }
 
   const createOrder = async () => {
-    let ttl = (amou * 1) * 12
+    let ttl = (amou * 1) * 1
     console.log(ttl)
     try {
         const res = await axios.post(`${url}/payments`, {
@@ -214,11 +214,14 @@ function Register() {
   };
 
   const onApprove = async (data) => {
-
+    console.log('OnApprove Check 1')
+    console.log(data)
+    console.log('OnApprove Check 1')
     try {
       const res = await axios.post(
         `${url}/payments`,{action: 'capture',orderID: data.orderID, compid: compId}
       );
+      console.log(res)
       if (res.data.status === "COMPLETED") {
         setSuccess(true);
         fnNavLogin()
@@ -467,7 +470,9 @@ function Register() {
                   options={{
                     "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
                     currency: "USD",
-                    components: "buttons,hosted-fields,funding-eligibility",
+                    components: "buttons,card-fields",
+                    intent: "capture",
+                    vault: false,
                   }}
                 >
                   <PayPalButtons
