@@ -182,8 +182,8 @@ export default function CompanyProfile() {
     totalMonths = -1 * totalMonths
 
     try {
-      let temp = amou * employees.length
-      let temp2 = (amou * numSpace) * monthsDiff
+      let temp =  employees.length
+      let temp2 = ( numSpace) * monthsDiff
       let add_space = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(temp2)
       let renew = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(temp)
       if(isModalOpenExpired){
