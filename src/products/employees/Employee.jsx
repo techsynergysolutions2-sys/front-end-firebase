@@ -3,7 +3,7 @@ import {Layout, Button, Card ,Col, Row,Typography ,Input,Select,Form,Table,Toolt
 import { SearchOutlined,DeleteOutlined  } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { useLocation,useNavigate } from "react-router-dom";
-import { fnGetData,fnCreateData,fnUpateData } from '../../shared/shared';
+import { fnGetData,fnCreateData,fnUpateData,fnGetDirectData } from '../../shared/shared';
 import AuditTrail from '../../components/AuditTrail';
 
 const { Content } = Layout;
@@ -38,9 +38,16 @@ function Employee() {
     var companyid = sessionStorage.getItem('companyid')
     try {
       const data = await fnGetData('departments',"departments", {companyid: companyid,isactive: 1}, { columns: '*'});
-      const data2 = await fnGetData('groups',"user_groups", {companyid: companyid}, { columns: '*'});
+      // const data2 = await fnGetData('groups',"user_groups", {companyid: companyid}, { columns: '*'});
+
+      let sql = `
+                SELECT * from user_groups ug
+                WHERE ug.companyid = ${companyid} OR ug.companyid = 0 AND ug.isactive = 1
+                `
+      const data2 = await fnGetDirectData('groups',sql);
       setDepartments(data);
       setGroups(data2)
+      console.log(data2)
     } catch (error) {
       
     }

@@ -38,7 +38,12 @@ function Profile() {
   const fetchDepartment = async () => {
     var companyid = sessionStorage.getItem('companyid')
     const data = await fnGetData('departments',"departments", {companyid: companyid,isactive: 1}, { columns: '*'});
-    const data2 = await fnGetData('groups',"user_groups", {companyid: companyid}, { columns: '*'});
+    // const data2 = await fnGetData('groups',"user_groups", {companyid: companyid}, { columns: '*'});
+    let sql = `
+              SELECT * from user_groups ug
+              WHERE ug.companyid = ${companyid} OR ug.companyid = 0 AND ug.isactive = 1
+              `
+    const data2 = await fnGetDirectData('groups',sql);
     setDepartments(data);
     setGroups(data2)
   };

@@ -1,7 +1,7 @@
 import React,{ useState, useEffect,useMemo } from 'react';
 import { Card, Checkbox,Select,Radio,notification } from 'antd';
 import {pages } from '../../shared/shared';
-import {fnGetData,fnCreateData,fnUpateData } from '../../shared/shared';
+import {fnGetData,fnCreateData,fnUpateData,fnGetDirectData } from '../../shared/shared';
 import { useNavigate,useLocation } from 'react-router-dom'
 
 const { Option } = Select;
@@ -31,7 +31,12 @@ const PermissionsTab = () => {
 
   const fetchDepartment = async () => {
     var companyid = sessionStorage.getItem('companyid')
-    const data = await fnGetData('groups',"user_groups", {companyid: companyid}, { columns: '*'});
+    // const data = await fnGetData('groups',"user_groups", {companyid: companyid}, { columns: '*'});
+    let sql = `
+              SELECT * from user_groups ug
+              WHERE ug.companyid = ${companyid} OR ug.companyid = 0 AND ug.isactive = 1
+              `
+    const data = await fnGetDirectData('groups',sql);
     setGroups(data);
 
     if(JSON.stringify(permissions) != "{}" ){
