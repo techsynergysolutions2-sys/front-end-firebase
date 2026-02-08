@@ -226,7 +226,7 @@ function Project() {
           if(data?.affectedRows > 0){
             api.success({
                 title: ``,
-                description: 'Order updated successfully.',
+                description: 'Project updated successfully.',
                 placement,duration: 2,
                 style: {
                     background: "#e2e2e2ff"

@@ -117,7 +117,7 @@ function Register() {
       // Create employee data
       
       // Create company data
-      // company['isactive'] = 0;
+      company['isactive'] = 0;
 
       const data2 = await fnCreateData('company', 'companies', company, 'new');
 
