@@ -9,7 +9,8 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import {url,fnCreateData,amou,fnGetDirectData} from '../shared/shared'
 import axios from 'axios';
 
-
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const steps = [
   {
@@ -120,6 +121,10 @@ function Register() {
       // company['isactive'] = 0;
 
       const data2 = await fnCreateData('company', 'companies', company, 'new');
+
+      if (!data2?.insertId) {
+        throw new Error('Company creation failed');
+      }
 
       member['uid'] = user.uid
       member['groupid'] = 1
@@ -453,6 +458,10 @@ function Register() {
                     </div>
                   </Row>
                   </Form.Item>
+
+                  <Backdrop sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })} open={loading}>
+                      <CircularProgress color="inherit" />
+                  </Backdrop>
 
                 </Form>
               </Card>
