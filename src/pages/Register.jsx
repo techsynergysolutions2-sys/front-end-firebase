@@ -59,6 +59,8 @@ function Register() {
     }else if('companyname' in values){
       setCompany(values)
       var total = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format((values['employee_count'] * amou) * 1) 
+      console.log(values['employee_count'])
+      console.log(total)
       var itms = [
         {
           label: 'Number of employees',
@@ -76,6 +78,8 @@ function Register() {
         },
       ];
       setPaymentItems(itms)
+
+      console.log(itms)
 
       fnCreateAuth()
       .then( async(result) => {
@@ -207,7 +211,7 @@ function Register() {
     console.log(ttl)
     try {
         const res = await axios.post(`${url}/payments`, {
-          employees: 2, 
+          employees: values['employee_count'], 
           action: 'orders'
         });
         console.log(res.data.id)
