@@ -211,7 +211,7 @@ function Register() {
     console.log(ttl)
     try {
         const res = await axios.post(`${url}/payments`, {
-          employees: values['employee_count'], 
+          employees: company['employee_count'], 
           action: 'orders'
         });
         console.log(res.data.id)
