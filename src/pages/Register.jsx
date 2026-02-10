@@ -64,7 +64,7 @@ function Register() {
       var itms = [
         {
           label: 'Number of employees',
-          children: values['employeesnumber'],
+          children: values['employee_count'],
         },
         {
           label: 'Price per employee',
