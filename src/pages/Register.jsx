@@ -106,18 +106,18 @@ function Register() {
 
     try {
       // Create user
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        member['email'],
-        member['password']
-      );
+      // const userCredential = await createUserWithEmailAndPassword(
+      //   auth,
+      //   member['email'],
+      //   member['password']
+      // );
 
-      const user = userCredential.user;
+      // const user = userCredential.user;
 
-      // Update display name
-      await updateProfile(user, {
-        displayName: `${member['firstname']} ${member['lastname']}`
-      });
+      // // Update display name
+      // await updateProfile(user, {
+      //   displayName: `${member['firstname']} ${member['lastname']}`
+      // });
 
       // Create employee data
       
@@ -130,7 +130,7 @@ function Register() {
         throw new Error('Company creation failed');
       }
 
-      member['uid'] = user.uid
+      // member['uid'] = user.uid
       member['groupid'] = 1
       member['companyid'] = data2.insertId
       const data = await fnCreateData('employees', 'employees', member, 'new');
@@ -141,7 +141,6 @@ function Register() {
         setCompId(data2.insertId);
         // fnGoBack()
         resolve({
-          user,
           employeeId: data.insertId,
           companyId: data2.insertId
         });
