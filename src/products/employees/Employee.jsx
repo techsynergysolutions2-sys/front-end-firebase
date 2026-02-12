@@ -63,7 +63,7 @@ function Employee() {
     if(JSON.stringify(employee) === "{}" ){
       try {
         values['companyid'] = sessionStorage.getItem('companyid')
-        values['skills'] = skills
+        // values['skills'] = skills
         values['isactive'] = 1
         values['createdby'] = sessionStorage.getItem('uid')
         const data = await fnCreateData('employees',"employees", values, 'new');
