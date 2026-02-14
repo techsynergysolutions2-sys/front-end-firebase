@@ -186,9 +186,17 @@ export default function CompanyProfile() {
       let temp2 = ( numSpace) * monthsDiff
       let add_space = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(temp2)
       let renew = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(temp)
+
+      console.log('================')
+      console.log(renew)
+      console.log(totalMonths)
+      console.log(monthsDiff)
+
+      let total = totalMonths * numSpace
+      console.log('================')
       if(isModalOpenExpired){
         const res = await axios.post(`${url}/space`, {
-        amount: renew,
+        amount: total,
         action: 'orders'
       });
       return res.data.id;
@@ -315,7 +323,8 @@ export default function CompanyProfile() {
                 options={{
                   "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
                   currency: "USD",
-                  components: "buttons,hosted-fields,funding-eligibility",
+                  components: "buttons",
+                    intent: "capture",
                 }}
               >
                 <PayPalButtons
