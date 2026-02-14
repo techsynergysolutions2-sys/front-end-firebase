@@ -196,7 +196,7 @@ export default function CompanyProfile() {
       console.log('================')
       if(isModalOpenExpired){
         const res = await axios.post(`${url}/space`, {
-        amount: total,
+        employees: total,
         action: 'orders'
       });
       return res.data.id;
