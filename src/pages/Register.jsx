@@ -227,7 +227,7 @@ function Register() {
     console.log('OnApprove Check 1')
     try {
       const res = await axios.post(
-        `${url}/payments`,{action: 'capture',orderID: data.orderID, compid: compId}
+        `${url}/payments`,{action: 'capture',orderID: data.orderID, compid: compId,page: 'register'}
       );
       console.log(res)
       if (res.data.status === "COMPLETED") {

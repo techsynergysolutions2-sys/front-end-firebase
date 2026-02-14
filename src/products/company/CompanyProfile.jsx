@@ -195,7 +195,7 @@ export default function CompanyProfile() {
       let total = totalMonths * numSpace
       console.log('================')
       if(isModalOpenExpired){
-        const res = await axios.post(`${url}/space`, {
+        const res = await axios.post(`${url}/payments`, {
         employees: total,
         action: 'orders'
       });
@@ -205,6 +205,7 @@ export default function CompanyProfile() {
         amount: add_space,
         action: 'orders'
       });
+      console.log(res.data.id)
       return res.data.id;
       }
       
@@ -239,7 +240,7 @@ export default function CompanyProfile() {
     try {
       let temp = count + numSpace
       const res = await axios.post(
-        `${url}/space`,{action: 'capture',orderID: data.orderID, compid: companyid, totalspace: temp}
+        `${url}/payments`,{action: 'capture',orderID: data.orderID, compid: companyid, totalspace: temp, page: 'space'}
       );
       if (res.data.status === "COMPLETED") {
         setSuccess(true);
