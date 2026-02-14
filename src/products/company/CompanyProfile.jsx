@@ -192,17 +192,18 @@ export default function CompanyProfile() {
       console.log(totalMonths)
       console.log(monthsDiff)
 
-      let total = totalMonths * numSpace
+      
       console.log('================')
       if(isModalOpenExpired){
         const res = await axios.post(`${url}/payments`, {
-        employees: total,
+        employees: count,
         action: 'orders'
       });
       return res.data.id;
       }else{
-        const res = await axios.post(`${url}/space`, {
-        amount: add_space,
+        let total = totalMonths * numSpace
+        const res = await axios.post(`${url}/payments`, {
+        employees: total,
         action: 'orders'
       });
       console.log(res.data.id)
