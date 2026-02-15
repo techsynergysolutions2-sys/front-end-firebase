@@ -63,7 +63,7 @@ function Register() {
       console.log(total)
       var itms = [
         {
-          label: 'Number of employees',
+          label: 'Employees',
           children: values['employee_count'],
         },
         {

@@ -83,7 +83,7 @@ function Employee() {
         }else{
           api.error({
                 title: ``,
-                description: 'Something went wrong. Please try again',
+                description: 'Something went wrong or the email already exist. Please try again',
                 placement,duration: 2,
                 style: {
                     background: "#e2e2e2ff"
@@ -114,7 +114,7 @@ function Employee() {
         }else{
           api.warning({
               title: ``,
-              description: 'Something went wrong. Please try again',
+              description: 'Something went wrong or the email already exist. Please try again',
               placement,duration: 2,
               style: {
               background: "#e2e2e2ff"
@@ -124,7 +124,7 @@ function Employee() {
       } catch (error) {
         api.warning({
               title: ``,
-              description: 'Something went wrong. Please try again',
+              description: 'Something went wrong or the email already exist. Please try again',
               placement,duration: 2,
               style: {
               background: "#e2e2e2ff"

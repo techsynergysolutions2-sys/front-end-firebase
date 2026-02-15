@@ -1,6 +1,6 @@
-import React,{useState, useEffect,useRef} from 'react'
+import React,{useState, useEffect,useRef,useMemo} from 'react'
 import {Layout, Button, Badge,Card ,Col, Row,Typography ,Input,Select,Skeleton,Form,DatePicker,Modal,Table,Tooltip,message,Space,Checkbox, 
-    Progress   } from 'antd';
+    Progress,notification   } from 'antd';
 import dayjs from 'dayjs';
 import { EditOutlined,SearchOutlined,PlusOutlined,DeleteOutlined  } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
@@ -13,6 +13,9 @@ import { Building2, Mail, Phone, MapPin, Globe, Users, Upload, Save } from 'luci
 
 const { Header, Content } = Layout;
 const { Option } = Select;
+
+const Context = React.createContext({ name: 'Default' });
+let placement = 'topRight'
 
 function Profile() {
 
@@ -28,6 +31,7 @@ function Profile() {
   const [photourl, setPhotoUrl] =  useState('')
   const [employee, setEmployee] =  useState(null)
   const [pass, setPass] = useState('')
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     
@@ -68,6 +72,18 @@ function Profile() {
         
     }
 
+    let permissions = sessionStorage.getItem('permissions')
+    if(permissions == '0,100'){
+      api.warning({
+          title: ``,
+          description: 'Your user group was not assigned any permissions. Please request permissions from you administrator.',
+          placement,duration: 30,
+          style: {
+              background: "#e2e2e2ff"
+          },
+      });
+    }
+
   }
 
   const onFinish = async (values) => {
@@ -76,7 +92,25 @@ function Profile() {
       
       delete values['password']
       const data = await fnUpateData('employees',"employees", values,'id = ? AND isactive = ?',[employee['id'],1], 'update');
-      
+      if(data?.affectedRows > 0){
+          api.success({
+              title: ``,
+              description: 'Profile updated successfully.',
+              placement,duration: 2,
+              style: {
+                  background: "#e2e2e2ff"
+              }
+          });
+        }else{
+          api.warning({
+              title: ``,
+              description: 'Something went wrong. Please try again',
+              placement,duration: 2,
+              style: {
+              background: "#e2e2e2ff"
+              },
+          });
+        }
       
     } catch (error) {
      
@@ -297,8 +331,10 @@ function Profile() {
     }
   };
 
+  const contextValue = useMemo(() => ({ name: 'Ant Design' }), []);
   return (
-    <>
+    <Context.Provider value={contextValue}>
+      {contextHolder}
         {
                 employee == null ? (
                   <Skeleton active />
@@ -597,7 +633,7 @@ function Profile() {
                     </Content>
                 )
         }
-    </>
+    </Context.Provider>
     
   )
 }

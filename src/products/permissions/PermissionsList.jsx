@@ -24,10 +24,10 @@ function PermissionsList() {
                   SELECT gp.*,ug.title 
                   FROM group_permissions gp
                   JOIN user_groups ug
-                  ON gp.id = ug.id
-                  WHERE gp.companyid = ${companyid}
+                  ON gp.groupid = ug.id
+                  WHERE gp.companyid = ${companyid} OR gp.companyid = 0
                   `
-              
+            
         try {
           const data = await fnGetDirectData('orders',sql);
           setPermissions(data);

@@ -99,11 +99,20 @@ function Login(){
                                 }
                             
                         }else{
-                            if(groupid != 1 || groupid != 1){
-                                sessionStorage.setItem('permissions',data3[0].permissions)
+                            console.log("Check 1")
+                            if(groupid != 1){
+                                if(data3.length == 0){
+                                    sessionStorage.setItem('permissions','0,100')
+                                    navigate('/profile')
+                                }else{
+                                    sessionStorage.setItem('permissions',data3[0].permissions)
+                                }
+                                
                             }else{
+                                console.log("Check 3")
                                 sessionStorage.setItem('permissions',0)
                             }
+                            console.log("Check 4")
                             sessionStorage.setItem('groupid',data2[0].groupid)
                             navigate('/tasklist')
                         }
