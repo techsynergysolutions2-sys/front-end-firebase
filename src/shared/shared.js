@@ -1,10 +1,4 @@
 import {
-    HomeOutlined,
-    FontColorsOutlined,
-    UserOutlined,
-    IssuesCloseOutlined,
-    FullscreenOutlined,
-    FullscreenExitOutlined,
     LockOutlined,
     LineChartOutlined,
     ShoppingCartOutlined,
@@ -17,7 +11,7 @@ import {Avatar } from 'antd';
 import { getFirestore, collection, query, where, getDocs,addDoc,updateDoc,doc  } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateEmail, updatePassword, updateProfile } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, initGuestAuth } from "./firebase";
 import axios from 'axios';
 
 const fnLogin = () => {
@@ -77,16 +71,16 @@ const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg", "application/pdf"
 
 // Live
 // export const url = 'https://app-ihcagnmida-uc.a.run.app'
-export const url = 'https://api-ihcagnmida-uc.a.run.app'
-export const host_url = 'https://eben-crm.com'
+// export const url = 'https://api-ihcagnmida-uc.a.run.app'
+// export const host_url = 'https://eben-crm.com'
 // export const host_url = 'crm-solutions-34e5f.firebaseapp.com'
 // export const host_url = 'crm-solutions-34e5f.web.app'
 
 
 //Testing
 // export const url = 'http://127.0.0.1:5001/crm-solutions-34e5f/us-central1/app'
-// export const url = 'http://127.0.0.1:5001/crm-solutions-34e5f/us-central1/app'
-// export const host_url = 'http://localhost:3000'
+export const url = 'http://127.0.0.1:5001/crm-solutions-34e5f/us-central1/api'
+export const host_url = 'http://localhost:3000'
 
 // export const amou = 4.99
 export const amou = 1
@@ -323,9 +317,10 @@ export const pages = [
     {id: 9, title: 'Employees'},
     {id: 10, title: 'Clients'},
     {id: 11, title: 'Departments'},
-    {id: 12, title: 'Permissions'},
-    {id: 13, title: 'Company profile'},
-    {id: 14, title: 'Groups'}
+    {id: 12, title: 'Groups'},
+    {id: 13, title: 'Permissions'},
+    {id: 14, title: 'Company profile'},
+    
 ]
 
 function getItem(id,label, key, icon, children) {
@@ -338,7 +333,53 @@ function getItem(id,label, key, icon, children) {
     };
 }
 
-export const fnConnectNavigation = (permissions) =>{
+export const fnConnectNavigation = (pageid) => {
+
+  let groupid = sessionStorage.getItem('groupid')
+  if (groupid == 1 || groupid == 0) return true
+
+  let temp = sessionStorage.getItem('permissions')
+  let permissions = JSON.parse(temp)
+  return permissions.some(obj => obj.pageid === pageid);
+}
+
+export const fnConnectNavigationTitles = (pageids) => {
+
+  if(sessionStorage.getItem('permissions') == '' || sessionStorage.getItem('permissions') == undefined){
+    window.location.replace(`${host_url}/login`);
+    return
+  }
+
+  let groupid = sessionStorage.getItem('groupid')
+  if (groupid == 1 || groupid == 0) return true
+
+  let temp = sessionStorage.getItem('permissions')
+  let permissions = JSON.parse(temp)
+  let x = []
+  for(let i = 0; i < pageids.length; i++){
+    if(permissions.some(obj => obj.pageid === pageids[i])){
+      return true
+    }
+  }
+  return false
+}
+
+export const fnHasPermission = (pageid,actionid) => {
+
+  if(!fnConnectNavigation(pageid)){
+    window.location.replace(`${host_url}/login`);
+    return
+  }
+
+  let groupid = sessionStorage.getItem('groupid')
+  if (groupid == 1 || groupid == 0) return true
+
+  let temp = sessionStorage.getItem('permissions')
+  let permissions = JSON.parse(temp)
+  return permissions.some(obj => obj.pageid == pageid && obj.actions.includes(actionid));
+}
+
+export const fnConnectNavigation2 = (permissions) =>{
 
     const admin = [
       {
@@ -494,9 +535,13 @@ export const fnDateFormater = (num) => {
   return formattedDate
 }
 
-export async function fnUploadFile(file, path = "uploads/") {
+export async function fnUploadFile_copy(file, path = "uploads/") {
   return new Promise(async (resolve, reject) => {
     try {
+
+      // 🔐 Ensure guest is authenticated
+      const user = await initGuestAuth();
+
       // Validation
       if (!file) return reject("No file provided.");
       if (!ALLOWED_TYPES.includes(file.type)) {
@@ -513,6 +558,39 @@ export async function fnUploadFile(file, path = "uploads/") {
       await uploadBytes(fileRef, file);
 
       // Get download URL
+      const downloadURL = await getDownloadURL(fileRef);
+      resolve(downloadURL);
+    } catch (error) {
+      reject("Upload failed: " + error.message);
+    }
+  });
+}
+
+export async function fnUploadFile(file, path = "uploads/") {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // 🔐 Ensure guest is authenticated
+      const user = await initGuestAuth();
+
+      // Validation
+      if (!file) return reject("No file provided.");
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        return reject("Only images (PNG, JPG) and PDFs are allowed.");
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        return reject("File size must not exceed 5MB.");
+      }
+
+      const storage = getStorage();
+
+      // 👇 Save per user (IMPORTANT)
+      const fileRef = ref(
+        storage,
+        `${path}${user.uid}/${Date.now()}_${file.name}`
+      );
+
+      await uploadBytes(fileRef, file);
+
       const downloadURL = await getDownloadURL(fileRef);
       resolve(downloadURL);
     } catch (error) {
@@ -568,6 +646,7 @@ export const fnUpdateUserLoginDetails = async (email,password) => {
     return { success: false, message: error.message };
   }
 };
+
 
 
 
@@ -658,3 +737,17 @@ export const fnFindAndUpdateDocumentWithMultipleFields = async (
   }
 };
 
+
+export const fnConvertUtcToLocal = (utcString) => {
+    // 1. Ensure the string is treated as UTC by adding the 'Z' (Zulu) suffix
+    // If your string already has a 'Z', this check avoids double-tagging
+    const zuluString = utcString.endsWith('Z') ? utcString : utcString + 'Z';
+    
+    const date = new Date(zuluString);
+
+    // 2. Use the "Offset Math" to shift the numbers to match your local clock
+    const offset = date.getTimezoneOffset() * 60000;
+    const localISO = new Date(date - offset).toISOString().slice(0, 16);
+
+    return localISO;
+}

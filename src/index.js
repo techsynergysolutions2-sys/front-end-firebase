@@ -4,16 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { StateProvider} from './data/StateProvider';
-import reducer,{ initialState } from './data/reducer';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <StateProvider initialState={initialState} reducer={reducer}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </StateProvider>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

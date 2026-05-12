@@ -1,0 +1,154 @@
+
+/* Layout */
+.projects-layout{
+    display:flex;
+    height:100vh;
+    width: 100%;
+}
+
+.projects-main{
+    flex:1;
+    padding:30px 40px;
+    position:relative;
+    overflow-y:auto;
+}
+
+/* Header */
+.projects-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.projects-header h1{
+    font-size:22px;
+    font-weight:600;
+    color: #0f172a;
+}
+
+.filter{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+}
+
+.filter select{
+    padding:6px 10px;
+    border-radius:6px;
+    border:1px solid #e5e7eb;
+}
+
+/* Grid */
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:25px;
+}
+
+/* Card */
+.project-card{
+    background: #ffffff;
+    border-radius:12px;
+    padding:20px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 5px 20px rgba(0,0,0,0.03);
+    position:relative;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+}
+
+.project-card h3{
+    margin-top:8px;
+    font-size:18px;
+}
+
+.description{
+    font-size:13px;
+    color: #6b7280;
+    margin-bottom:12px;
+}
+
+.meta{
+    font-size:12px;
+    color: #6b7280;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+/* Status Badges */
+.status-badge{
+    font-size:11px;
+    padding:5px 10px;
+    border-radius:20px;
+    font-weight:500;
+    display:inline-block;
+}
+
+.planned{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.in-progress{
+    background:#fed7aa;
+    color:#c2410c;
+}
+
+.waiting-for-approval{
+    background:#e9d5ff;
+    color:#7e22ce;
+}
+
+.on-hold{
+    background:#fef08a;
+    color:#a16207;
+}
+
+/* Progress */
+.progress-bar{
+    height:6px;
+    background:#c0c1c3;
+    border-radius:4px;
+    overflow:hidden;
+    margin-bottom:12px;
+}
+
+.progress-fill{
+    height:100%;
+    background: #4f46e5;
+}
+
+/* Avatar */
+.avatar{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#fff;
+    /* color:white; */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* Floating Button */
+.fab{
+    position:fixed;
+    bottom:30px;
+    right:40px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background: #4f46e5;
+    color:white;
+    border:none;
+    font-size:24px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(79,70,229,.4);
+}

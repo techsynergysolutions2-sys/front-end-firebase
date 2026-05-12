@@ -1,0 +1,164 @@
+
+.project_details_project-layout{
+    display:flex;
+    height:100vh;
+    width: 100%;
+}
+
+.project_details_main{
+    flex:1;
+    display:flex;
+    overflow:hidden;
+}
+
+/* Content */
+.project_details_content{
+    flex:2;
+    padding:40px 50px;
+    overflow-y:auto;
+}
+
+.project_details_header{
+    margin-bottom:30px;
+}
+
+.project_details_header h1{
+    font-size:26px;
+    font-weight:600;
+    color: #0f172a;
+}
+
+.project_details_meta{
+    font-size:13px;
+    color: #6b7280;
+    margin-top:6px;
+}
+
+/* Card */
+.project_details_card{
+    background: #ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.project_details_card h3{
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+/* Task List */
+.project_details_task-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #e5e7eb;
+    font-size:14px;
+}
+
+.project_details_task-status{
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:20px;
+}
+
+.project_details_in-progress{background:#fed7aa;color:#c2410c;}
+.project_details_planned{background:#dbeafe;color:#2563eb;}
+.project_details_on-hold{background:#fef08a;color:#a16207;}
+
+/* Panel */
+.project_details_panel{
+    width:360px;
+    background:white;
+    border-left:1px solid #e5e7eb;
+    padding:30px 25px;
+    overflow-y:auto;
+}
+
+.project_details_panel-section{margin-bottom:30px;}
+.project_details_panel-title{
+    font-size:12px;
+    text-transform:uppercase;
+    color: #6b7280;
+    margin-bottom:15px;
+}
+
+.project_details_meta-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.project_details_meta-label{color: #6b7280;}
+.project_details_meta-value{color: #0f172a;}
+
+/* Progress */
+.project_details_progress-bar{
+    height:6px;
+    background:#e5e7eb;
+    border-radius:4px;
+    overflow:hidden;
+}
+
+.project_details_progress-fill{
+    height:100%;
+    background: #4f46e5;
+}
+
+.project_details_progress-label{
+    font-size:12px;
+    margin-top:6px;
+    color: #6b7280;
+}
+
+/* Activity */
+.project_details_activity{
+    display:flex;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.project_details_avatar{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#d1d5db;
+}
+
+.project_details_activity-time{
+    font-size: 12px;
+}
+
+/* Comment */
+.project_details_comment-box textarea{
+    width:100%;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    padding:10px;
+    font-size:13px;
+    resize:none;
+    min-height:70px;
+}
+
+.project_details_comment-box button{
+    margin-top:10px;
+    background: #4f46e5;
+    border:none;
+    color:white;
+    padding:8px 14px;
+    border-radius:6px;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.project_details_comment-box button:hover{
+    background: #4f46e5;
+}
+
+/* Responsive */
+@media(max-width:1100px){
+    .project_details_panel{display:none;}
+    .project_details_content{padding:25px;}
+}

@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {Button,Col, Row,Modal,Table } from 'antd';
-import {fnGetDirectData } from '../shared/shared'
+import {fnGetDirectData,fnConvertUtcToLocal } from '../shared/shared'
 
 function AuditTrail({recid,pageid,showhide,fnShowAudit}) {
 
@@ -20,8 +20,8 @@ function AuditTrail({recid,pageid,showhide,fnShowAudit}) {
                 const localDate = new Date(record.createddate);
                 return(
                      <>
-                        {/* {record.createddate?.replace('T', ' ')} */}
-                        {localDate.toLocaleString("en-ZA")}
+                        {fnConvertUtcToLocal(record.createddate)?.replace('T', ' ')}
+                        {/* {localDate.toLocaleString("en-ZA")} */}
                     </>
                 )
             },
