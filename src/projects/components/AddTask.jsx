@@ -5,6 +5,8 @@ import {task_priority,fnGetDirectData,fnCreateData} from '../../shared/shared'
 const Context = React.createContext({ name: 'Default' });
 let placement = 'topRight'
 
+const { TextArea } = Input;
+
 function AddTask({fnAddTask,fnShowNewTask,projectId,showhide}) {
 
     const [employees, SetEmployees] = useState([])
@@ -171,6 +173,23 @@ function AddTask({fnAddTask,fnShowNewTask,projectId,showhide}) {
                             },
                             ]}>
                             <input type="datetime-local" />
+                            </Form.Item>
+                            </div>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col span={24}>
+                            <div className="form-group">
+                            <label>Description</label>
+                            <Form.Item name="description" 
+                            rules={[
+                            {
+                                required: true,
+                                message: 'Please input description!',
+                            },
+                            ]}>
+                                <TextArea rows={2}  />
                             </Form.Item>
                             </div>
                         </Col>

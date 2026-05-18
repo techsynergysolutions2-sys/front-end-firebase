@@ -76,8 +76,14 @@ const Ticket = () => {
   
     const fnSendData = async () => {
 
-        if(assignedTo != null || assignedTo != undefined){
-            if(assignedTo != values['assignto']){
+        if(JSON.stringify(ticket) != "{}"){
+          if(assignedTo != null || assignedTo != undefined){
+            if(assignedTo == values['assignto']){
+                values['sendnotification'] = true
+            }
+          }
+        }else{
+          if(values['assignto'] != undefined){
                 values['sendnotification'] = true
             }
         }

@@ -7,7 +7,7 @@ const { TextArea } = Input;
 const Context = React.createContext({ name: 'Default' });
 let placement = 'topRight'
 
-function NewProject({showhide,fnShowProjectInfor,projectinfor,fnAddTask}) {
+function NewProject({showhide,fnShowProjectInfor,projectinfor,fnAddTask,fetchClients}) {
 
     const [project, setProject] = useState(projectinfor)
     const [api, contextHolder] = notification.useNotification();
@@ -55,6 +55,7 @@ function NewProject({showhide,fnShowProjectInfor,projectinfor,fnAddTask}) {
                     },
                 });
                 fnShowProjectInfor(false)
+                fetchClients()
             }else{
                 api.error({
                     title: ``,
@@ -78,6 +79,7 @@ function NewProject({showhide,fnShowProjectInfor,projectinfor,fnAddTask}) {
                         background: "#e2e2e2ff"
                     },
                 });
+                fetchClients()
             }else{
                 api.warning({
                     title: ``,
@@ -159,12 +161,7 @@ function NewProject({showhide,fnShowProjectInfor,projectinfor,fnAddTask}) {
                         <label>Client</label>
                         <Form.Item
                             name="client"
-                            rules={[
-                            {
-                                required: true,
-                                message: 'Please select a client!',
-                            },
-                            ]}
+                            
                         >
                             <Select allowClear={true} placeholder="Please select a client" size='large'
                                 options={clients?.map(itm => ({

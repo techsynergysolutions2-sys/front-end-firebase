@@ -12,7 +12,10 @@ export default function Projects() {
   const [filteredProjects, setFilteredProjects] = useState([])
 
   useEffect(() =>{
-    const fetchClients = async () => {
+        fetchClients();
+  },[])
+
+  const fetchClients = async () => {
      
       var companyid = sessionStorage.getItem('companyid')
 
@@ -87,9 +90,6 @@ export default function Projects() {
         
       }
     };
-    
-        fetchClients();
-  },[])
 
   const fnFilterProjects = async (e) =>{
    
@@ -109,7 +109,7 @@ export default function Projects() {
   return (
     <div className="projects-layout">
 
-      <NewProject pageid={pageid} showhide={newRecord} fnShowProjectInfor={fnShowProjectInfor} projectinfor={{}}/>
+      <NewProject pageid={pageid} fetchClients={fetchClients} showhide={newRecord} fnShowProjectInfor={fnShowProjectInfor} projectinfor={{}}/>
 
       <div className="projects-main">
         <div className="projects-header">

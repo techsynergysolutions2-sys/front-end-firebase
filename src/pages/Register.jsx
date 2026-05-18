@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import { Button, DatePicker, Form, Input,Card,Row,Col,Typography,Upload,message,Steps, InputNumber,Descriptions,Spin    } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, LeftOutlined } from '@ant-design/icons';
 import {useNavigate, Outlet } from 'react-router-dom'
 import { db,auth } from '../shared/firebase';
 import {createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
@@ -242,13 +242,15 @@ function Register() {
 
   return (
     <Row>
-      
+      <div style={{position: 'fixed', top: 15, left: 15, zIndex: 999}}>
+        <span style={{fontSize: 17, cursor: 'pointer', fontWeight: 600}} onClick={() => fnNavLogin()}><LeftOutlined style={{fontSize: 14}}/>Sign In</span>
+      </div>
       <Col span={24}>
         <Row justify="center" style={{marginTop: 40}}>
           <Steps current={current} items={items} style={{width: 800}}/>
         </Row>
 
-        <Row justify="center" style={{marginTop: 40}}>
+        <Row justify="center" style={{marginTop: 40, marginBottom: 40}}>
           {
             current === 0  && (
               <Card style={{ width: 600, boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)" }}>
@@ -520,11 +522,11 @@ function Register() {
           
         </Row>
 
-        <Row justify="center" style={{marginTop: 20, marginBottom: 20}}>
+        {/* <Row justify="center" style={{marginTop: 20, marginBottom: 20}}>
           <Button type="primary" onClick={() => fnNavLogin()}>
             Login
           </Button>
-        </Row>
+        </Row> */}
 
       </Col>
     </Row>

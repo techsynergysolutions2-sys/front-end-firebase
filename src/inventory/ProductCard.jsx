@@ -69,7 +69,9 @@ const ProductCard = ({ product,loaddata }) => {
     }
     try {
       let values = {
-        isactive: 0
+        isactive: 0,
+        updateby: sessionStorage.getItem('uid'),
+        id: record
       }
         const data = await fnUpateData('products',"products", values,'id = ? AND isactive = ?',[record,1], 'update');
         loaddata()
@@ -110,13 +112,13 @@ const ProductCard = ({ product,loaddata }) => {
           ):(null)
         }
         
-        {
+        {/* {
           fnHasPermission(2,4)? (
             <div className="product-action" onClick={() => onDelete(product.id)}>
               <i className="fas fa-trash"></i> Delete
             </div>
           ):(null)
-        }
+        } */}
         
       </div>
     </div>

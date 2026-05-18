@@ -140,6 +140,10 @@ export default function Login() {
 
     };
 
+    const fnRegisterNavigate = () => {
+        navigate('/register')
+    }
+
     const contextValue = useMemo(() => ({ name: 'Ant Design' }), []);
 
   return (
@@ -181,7 +185,9 @@ export default function Login() {
                 {loading ? "Signing in..." : "Sign In"}
             </button>
             </form>
-
+            <div className="login-footer">
+            <span style={{fontSize: 15, cursor: 'pointer'}} onClick={() => fnRegisterNavigate()}>Create Account</span>
+            </div>
             <div className="login-footer">
             <span>© {new Date().getFullYear()} Enterprise Suite</span>
             </div>
