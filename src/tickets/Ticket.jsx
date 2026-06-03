@@ -79,6 +79,8 @@ const Ticket = () => {
         if(JSON.stringify(ticket) != "{}"){
           if(assignedTo != null || assignedTo != undefined){
             if(assignedTo == values['assignto']){
+                values['sendnotification'] = false
+            }else{
                 values['sendnotification'] = true
             }
           }

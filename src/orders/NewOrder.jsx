@@ -104,7 +104,9 @@ const CreateOrder = () => {
        if(JSON.stringify(order) != "{}"){
           if(assignedTo != null || assignedTo != undefined){
             if(assignedTo == values['assignto']){
-                values['sendnotification'] = true
+                values['sendnotification'] = false
+            }else{
+              values['sendnotification'] = true
             }
           }
         }else{
