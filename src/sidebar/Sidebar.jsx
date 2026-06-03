@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { NavLink } from "react-router-dom";
 import "./sidebar.css";
-import { host_url,fnConnectNavigation,fnConnectNavigationTitles } from '../shared/shared';
+import { host_url,fnConnectNavigation,fnConnectNavigationTitles,fnGetDirectData } from '../shared/shared';
 
 export default function Sidebar() {
 
@@ -9,7 +9,13 @@ export default function Sidebar() {
 
     let temp = fnCheckLogin()
 
+    let isactive = fnIsActive()
+
     if(temp == false){
+      window.location.replace(`${host_url}/login`);
+    }
+
+    if(!isactive){
       window.location.replace(`${host_url}/login`);
     }
     
@@ -198,3 +204,24 @@ const fnCheckLogin = () => {
   return true
   
 }
+
+const fnIsActive = async () => {
+
+  var uid = sessionStorage.getItem('uid')
+
+  let sql = `
+    SELECT id FROM employees WHERE id = ${uid} AND isactive = 1
+  `
+
+  try {
+    const res = await fnGetDirectData('dashboard',sql);
+    if(res.length > 0){
+      return true
+    }
+  } catch (error) {
+    
+  }
+
+  return false
+}
+

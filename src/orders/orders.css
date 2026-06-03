@@ -209,6 +209,12 @@
   box-shadow: var(--box-shadow);
 }
 
+.orders-chart-container {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
 .orders-table {
   width: 100%;
   border-collapse: collapse;

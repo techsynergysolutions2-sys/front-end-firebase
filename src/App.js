@@ -30,7 +30,7 @@ import Profile from './profile/Profile'
 import Department from './department/Department'
 import Departments from './department/Departments'
 import CompanyProfile from './company/CompanyProfile'
-import AboutPage from './about/About';
+import About from './about/About';
 
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
       <Routes>
           <Route Component={Login} path="/login"/>
           <Route Component={Register} path="/register"/>
-          <Route Component={AboutPage} path="/crm"/>
+          <Route Component={About} path="/crm"/>
           <Route Component={Home} path="/">
             <Route Component={Tasks} path="/tasks"/>
             <Route Component={TaskDetail} path="/taskdetail"/>
