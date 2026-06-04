@@ -152,7 +152,7 @@ export default function Login() {
         <div className="login-layout">
         <div className="login-card">
             <div className="login-header">
-            <h2>Enterprise Suite</h2>
+            <h2>Eben CRM</h2>
             <p>Sign in to continue</p>
             </div>
 
