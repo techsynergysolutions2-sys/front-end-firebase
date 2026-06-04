@@ -75,8 +75,8 @@ textarea {
 }
 
 .add-product {
-  background: #28a745;
-  margin-top: 10px;
+  background: #28a745 !important;
+  /* margin-top: 10px; */
 }
 
 .add-product:hover {

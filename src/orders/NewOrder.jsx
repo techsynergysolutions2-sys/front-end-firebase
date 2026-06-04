@@ -27,6 +27,8 @@ const CreateOrder = () => {
   const [openAuidt, setOpenAudit] = useState(false)
   const [assignedTo, setAssignedTo] = useState(order?.assignto)
 
+  const [canChange, SetCanChange] = useState(true)
+
   var companyid = sessionStorage.getItem('companyid')
 
   const [orderProducts, setOrderProducts] = useState([]);
@@ -63,6 +65,15 @@ const CreateOrder = () => {
     if(JSON.stringify(order) != "{}"){
       setOrderProducts(order.products)
       setTotal( Math.round(order.order_total * 100) / 100)
+      var uid = sessionStorage.getItem('uid')
+      var groupid = sessionStorage.getItem('groupid')
+      if((order.assignto == uid) || (groupid == 1) ){
+        SetCanChange(false)
+      }else{
+        SetCanChange(true)
+      }
+    }else{
+      SetCanChange(false)
     }
     
   }
@@ -242,7 +253,7 @@ const CreateOrder = () => {
 
     <div className="container" style={{width: '100%', height: '98%',overflowY: 'scroll',scrollbarWidth: 'none'}}>
       <div className="card">
-        <h2>Order <span>{order.ordernumber}</span></h2> 
+        <h2>Order <span>{order.id}</span></h2> 
         <Form name="basic" initialValues={order} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off" >
           {/* Customer Info */}
             <Row>
@@ -339,11 +350,11 @@ const CreateOrder = () => {
                         <Select showSearch
                         allowClear={true} placeholder="Please select a status" size='large'>
                             {
-                            order_status?.map((itm,key) => {
-                              return(
-                                <Option value={itm.id} key={key}>{itm.label}</Option>
-                              )
-                            })
+                              order_status?.map((itm,key) => {
+                                return(
+                                  <Option value={itm.id} key={key}>{itm.label}</Option>
+                                )
+                              })
                             }
                         </Select>
                         </Form.Item>
@@ -389,21 +400,28 @@ const CreateOrder = () => {
                     </Col>
                     <Col span={2}></Col>
                     <Col span={11}>
-                        <input
-                        type="number"
-                        placeholder="Qty"
-                        onChange={(e) => fnCalcPrice(e.target.value)}
-                        />
+                      <Row>
+                        <Col span={16}>
+                            <input
+                              type="number"
+                              placeholder="Qty"
+                              onChange={(e) => fnCalcPrice(e.target.value)}
+                              />
+                        </Col>
+                        <Col span={1}></Col>
+                        <Col span={7}>
+                            <button
+                              type="button"
+                              className="btn add-product"
+                              onClick={fnHandleAddProduct}
+                            >
+                              + Add Product
+                            </button>
+                        </Col>
+                      </Row>
                     </Col>
                   </Row>
 
-                  <button
-                    type="button"
-                    className="btn add-product"
-                    onClick={fnHandleAddProduct}
-                  >
-                    + Add Product
-                  </button>
                 </>
               )
             }
@@ -451,7 +469,7 @@ const CreateOrder = () => {
             </Button>
           </Form.Item> */}
           <div className="form-actions">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" disabled={canChange}>
                 Save Order
             </button>
             {

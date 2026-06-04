@@ -53,9 +53,9 @@ function AuditTrail({recid,pageid,showhide,fnShowAudit}) {
             setAudit([])
         }
       }
-
+ 
   return (
-    <Modal title="Audit Trail" open={showhide} width={1000} onCancel={() => fnShowAudit(false)} maskClosable={true}
+    <Modal title="Audit Trail" open={showhide} width={1000} onCancel={() => fnShowAudit(false)} maskClosable={true}  style={{height: '80%', overflowY: 'scroll'}}
         footer={
             <Button onClick={() => fnShowAudit(false)}>
             Cancel

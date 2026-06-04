@@ -110,11 +110,15 @@
 }
 
 .stat-card.primary {
-  border-top: 4px solid var(--primary);
+  border-top: 4px solid var(--primary-light);
 }
 
 .stat-card.success {
   border-top: 4px solid var(--success);
+}
+
+.stat-card.processing {
+  border-top: 4px solid var(--primary);
 }
 
 .stat-card.warning {

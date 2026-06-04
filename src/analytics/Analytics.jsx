@@ -113,7 +113,6 @@ const Analytics = () => {
               '%Y-%m'
           ) = DATE_FORMAT(m.month_start, '%Y-%m')
           AND o.companyid = ${companyid}
-          AND o.status = 3
           AND o.isactive = 1
       GROUP BY m.month_start
       ORDER BY m.month_start;
@@ -276,7 +275,7 @@ const Analytics = () => {
                                 series={[
                                     {
                                     data: lineOrders.map(x => x.total_orders),
-                                    label: 'Completed Orders',
+                                    label: 'Total Orders',
                                     }
                                 ]}
                                 height={270}

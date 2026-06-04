@@ -13,6 +13,7 @@ const Orders = () => {
   const [totalOrders, setTotalOrders] = useState(0)
   const [totalCompleted, setTotalCompleted] = useState(0)
   const [totalPending, setTotalPending] = useState(0)
+  const [totalProcessing, setTotalProcessing] = useState(0)
   const [totalCanceled, setTotalCanceled] = useState(0)
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,42 +58,37 @@ const Orders = () => {
                 )
               ),
               JSON_ARRAY()
-            ) AS products,
+            ) AS products
 
-            -- Global order stats (joined once)
-            totals.total_orders,
-            totals.completed_orders,
-            totals.pending_orders,
-            totals.processing_orders,
-            totals.canceled_orders
 
             FROM orders o
             LEFT JOIN order_products op ON o.id = op.orderid
             LEFT JOIN products p ON op.productid = p.id
-            CROSS JOIN (
-            SELECT 
-              COUNT(CASE WHEN (companyid = ${companyid}) THEN 1 END) AS total_orders,
-              COUNT(CASE WHEN (status = 1 AND companyid = ${companyid}) THEN 1 END) AS pending_orders,
-              COUNT(CASE WHEN (status = 2 AND companyid = ${companyid}) THEN 1 END) AS processing_orders,
-              COUNT(CASE WHEN (status = 3 AND companyid = ${companyid}) THEN 1 END) AS completed_orders,
-              COUNT(CASE WHEN (status = 4 AND companyid = ${companyid}) THEN 1 END) AS canceled_orders
-            FROM orders
-            ) totals
 
             WHERE o.companyid = ${companyid} 
             GROUP BY o.id
             ORDER BY o.orderdate DESC;
 
           `
+      let sql_orderskpis = `
+            SELECT
+            (SELECT COUNT(id) FROM orders o WHERE o.companyid = ${companyid}) AS total_orders,
+            (SELECT COUNT(id) FROM orders o WHERE o.isactive = 1 AND o.companyid = ${companyid} AND o.status = 1) AS pending_orders,
+            (SELECT COUNT(id) FROM orders o WHERE o.isactive = 1 AND o.companyid = ${companyid} AND o.status = 2) AS processing_orders,
+            (SELECT COUNT(id) FROM orders o WHERE o.isactive = 1 AND o.companyid = ${companyid} AND o.status = 3) AS completed_orders,
+            (SELECT COUNT(id) FROM orders o WHERE o.isactive = 0 AND o.companyid = ${companyid} AND o.status = 4) AS canceled_orders
+        `
       
       try {
       const data = await fnGetDirectData('orders',sql);
+      const data1 = await fnGetDirectData('orders',sql_orderskpis);
       if(data?.length > 0){
         console.log(data)
-        setTotalOrders(data[0].total_orders)
-        setTotalCompleted(data[0].completed_orders)
-        setTotalPending(data[0].pending_orders)
-        setTotalCanceled(data[0].canceled_orders)
+        setTotalOrders(data1[0].total_orders)
+        setTotalCompleted(data1[0].completed_orders)
+        setTotalPending(data1[0].pending_orders)
+        setTotalCanceled(data1[0].canceled_orders)
+        setTotalProcessing(data1[0].processing_orders)
         setOrders(data);
         // setFilteredOrders(data);
 
@@ -146,7 +142,7 @@ const Orders = () => {
     <div className="app" style={{width: '100%', height: '98%',overflowY: 'scroll',scrollbarWidth: 'none',backgroundColor: '#fff'}}>
       <div className="container">
         <h1 className="dashboard-title">Order Management</h1>
-        <StatsCards totalOrders={totalOrders} totalCompleted={totalCompleted} totalPending={totalPending} totalCanceled={totalCanceled} />
+        <StatsCards totalOrders={totalOrders} totalCompleted={totalCompleted} totalPending={totalPending} totalCanceled={totalCanceled} totalProcessing={totalProcessing} />
         
         <div className="filters-section">
           <div className="filters-row">
@@ -237,7 +233,7 @@ const Orders = () => {
 };
 
 // Stats Cards Component
-const StatsCards = ({totalOrders, totalCompleted, totalPending, totalCanceled }) => {
+const StatsCards = ({totalOrders, totalCompleted, totalPending, totalCanceled,totalProcessing }) => {
   return (
     <div className="stats-cards">
       <div className="stat-card primary">
@@ -247,19 +243,26 @@ const StatsCards = ({totalOrders, totalCompleted, totalPending, totalCanceled })
         <div className="stat-value">{totalOrders}</div>
         <div className="stat-label">Total Orders</div>
       </div>
-      <div className="stat-card success">
-        <div className="stat-icon">
-          <i className="fas fa-check-circle"></i>
-        </div>
-        <div className="stat-value">{totalCompleted}</div>
-        <div className="stat-label">Completed</div>
-      </div>
       <div className="stat-card warning">
         <div className="stat-icon">
           <i className="fas fa-clock"></i>
         </div>
         <div className="stat-value">{totalPending}</div>
         <div className="stat-label">Pending</div>
+      </div>
+      <div className="stat-card processing">
+        <div className="stat-icon">
+          <i className="fas fa-clock"></i>
+        </div>
+        <div className="stat-value">{totalProcessing}</div>
+        <div className="stat-label">Processing</div>
+      </div>
+      <div className="stat-card success">
+        <div className="stat-icon">
+          <i className="fas fa-check-circle"></i>
+        </div>
+        <div className="stat-value">{totalCompleted}</div>
+        <div className="stat-label">Completed</div>
       </div>
       <div className="stat-card danger">
         <div className="stat-icon">
