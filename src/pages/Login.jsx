@@ -189,7 +189,7 @@ export default function Login() {
             <span style={{fontSize: 15, cursor: 'pointer'}} onClick={() => fnRegisterNavigate()}>Create Account</span>
             </div>
             <div className="login-footer">
-            <span>© {new Date().getFullYear()} Enterprise Suite</span>
+            <span>© {new Date().getFullYear()} Eben CRM</span>
             </div>
         </div>
         </div>

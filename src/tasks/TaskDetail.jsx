@@ -189,9 +189,6 @@ function MetaRow({ label, value }) {
 }
 
 function Activity({ user, action, time }) {
-  console.log(user)
-  console.log(action)
-  console.log(time)
   return (
     <div className="task_details_activity">
       <div className="task_details_avatar" />

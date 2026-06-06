@@ -16,7 +16,10 @@ export default function Tasks() {
   const [newRecord, setNewRecord] = useState(false)
 
   useEffect(() =>{
-    const fetchClients = async () => {
+    fetchClients();
+  },[])
+
+  const fetchClients = async () => {
       var companyid = sessionStorage.getItem('companyid')
       var uid = sessionStorage.getItem('uid')
       let sql = `
@@ -62,8 +65,6 @@ export default function Tasks() {
       }
     };
     
-    fetchClients();
-  },[])
 
   const fnFilterTasksDrop = (e) => {
     console.log(e)
@@ -82,7 +83,8 @@ export default function Tasks() {
   }
 
   const fnAddTask = (t) => {
-    setFilteredTask(prev => [t, ...prev]);
+    // setFilteredTask(prev => [t, ...prev]);
+    fetchClients()
   }
 
   return ( 

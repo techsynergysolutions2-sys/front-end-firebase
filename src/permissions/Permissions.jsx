@@ -76,30 +76,37 @@ export default function PermissionsPage() {
     fnAddRemovePermission(pageid,action)
   };
 
-  const fnAddRemovePermission = (pageid,actionid) => {
-      let tempArr = permissions
-      for(let i = 0; i < tempArr.length; i++){
-        if(tempArr[i].pageid == pageid){
-          if(tempArr[i].actions.includes(actionid)){
-            let idx = tempArr[i].actions.indexOf(actionid)
-            tempArr[i].actions = removeCharAtIndex(permissions[i].actions,idx)
-            setPermissions(tempArr)
-          }else{
-            console.log('check 5')
-            if(tempArr[i].actions.length > 0){
-              tempArr[i].actions = tempArr[i].actions.concat(`,${actionid}`)
-              setPermissions(tempArr)
-            }else{
-              tempArr[i].actions = tempArr[i].actions.concat(actionid)
-              setPermissions(tempArr)
-            }
-              
-          }
-        }
+  const fnAddRemovePermission = (pageid, actionid) => {
+  const tempArr = [...permissions];
+
+  for (let i = 0; i < tempArr.length; i++) {
+    if (tempArr[i].pageid === pageid) {
+
+      if (tempArr[i].actions.includes(actionid)) {
+        let idx = tempArr[i].actions.indexOf(actionid);
+
+        tempArr[i] = {
+          ...tempArr[i],
+          actions: removeCharAtIndex(tempArr[i].actions, idx)
+        };
+
+      } else {
+
+        tempArr[i] = {
+          ...tempArr[i],
+          actions:
+            tempArr[i].actions.length > 0
+              ? `${tempArr[i].actions},${actionid}`
+              : `${actionid}`
+        };
       }
-      console.log(tempArr)
-      console.log(permissions)
+
+      break;
+    }
   }
+
+  setPermissions(tempArr);
+};
 
   function removeCharAtIndex(str, index) {
     // 1. If the index is at the start (0)
