@@ -96,6 +96,7 @@ function Employee() {
     }else{
       try {
         delete values['password']
+        values['companyid'] = sessionStorage.getItem('companyid')
         values['id'] = employee['id']
         values['updateby'] = sessionStorage.getItem('uid')
         const data = await fnUpateData('employees',"employees", values,'id = ? AND isactive = ?',[employee['id'],1], 'update');
