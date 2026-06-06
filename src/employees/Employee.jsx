@@ -481,7 +481,7 @@ function Employee() {
                           <label>Password</label>
                           <Row>
                             <Col span={14} style={{marginRight: 20}}>
-                            <Form.Item name="password"  rules={[{ required: true, message: 'Please input your password!' }]} >
+                            <Form.Item name="password"  rules={[{ required: JSON.stringify(employee) === "{}" ? true : false, message: 'Please input your password!' }]} >
                               <Input.Password  size='large' onChange={ e => fnGetPassStr(e.target.value)}/>
                             </Form.Item>
                             </Col>
