@@ -70,8 +70,8 @@ const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg", "application/pdf"
 // export const url = 'http://ec2-13-60-191-59.eu-north-1.compute.amazonaws.com:5000'
 
 // Live
-// export const url = 'https://api-ihcagnmida-uc.a.run.app'
-// export const host_url = 'https://eben-crm.com'
+export const url = 'https://api-ihcagnmida-uc.a.run.app'
+export const host_url = 'https://eben-crm.com'
 
 
 // export const host_url = 'crm-solutions-34e5f.firebaseapp.com'
@@ -79,8 +79,8 @@ const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg", "application/pdf"
 
 
 //Testing
-export const url = 'http://127.0.0.1:5001/crm-solutions-34e5f/us-central1/api'
-export const host_url = 'http://localhost:3000'
+// export const url = 'http://127.0.0.1:5001/crm-solutions-34e5f/us-central1/api'
+// export const host_url = 'http://localhost:3000'
 
 // export const amou = 4.99
 export const amou = 1
