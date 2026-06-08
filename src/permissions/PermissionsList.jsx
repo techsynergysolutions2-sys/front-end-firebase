@@ -47,7 +47,7 @@ function PermissionsList() {
   }
 
   const fnHandleSearch = (e) => {
-    setFilteredPermissions(permissions.filter(p => p.title.toLowerCase().includes(e.toLowerCase())))
+    setFilteredPermissions(permissions.filter(p => p.title.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   return (

@@ -35,7 +35,7 @@ function Departments() {
   }
 
   const fnHandleSearch = (e) => {
-    setFilteredDepartments(departments.filter(d => d.title.toLowerCase().includes(e.toLowerCase())))
+    setFilteredDepartments(departments.filter(d => d.title.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   return (

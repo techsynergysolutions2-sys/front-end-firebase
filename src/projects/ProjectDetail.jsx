@@ -31,7 +31,6 @@ export default function ProjectDetail() {
   const priority = project_priority.find(t => t.value === project.priority);
 
   useEffect(() =>{
-    console.log(project)
     if(project.tasks.length > 0){
       let temp = project.tasks.filter((itm) => itm.status == 5)
       let calc = (temp.length / project.tasks.length) * 100
@@ -77,7 +76,7 @@ export default function ProjectDetail() {
 
       <NewProject pageid={pageid} showhide={newRecord} fnShowProjectInfor={fnShowProjectInfor} projectinfor={project}/>
       <AddTask fnAddTask={fnAddTask} fnShowNewTask={fnShowNewTask} projectId={project.id} showhide={newTask}/>
-      <Team projectId={project.id} showhide={team} fnShowTeam={fnShowTeam} fnTeam={fnTeam} invites={invites} />
+      <Team projectId={project.id}  title={project.title} showhide={team} fnShowTeam={fnShowTeam} fnTeam={fnTeam} invites={invites} />
       <Files projectId={project.id} showhide={files} fnShowFiles={fnShowFiles} project={project}/>
 
       <div className="project_details_project-layout">

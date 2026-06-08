@@ -41,9 +41,9 @@ const Leaves = () => {
         sql = `
             SELECT l.*,CONCAT(e.firstname, ' ', e.lastname) AS fullname
             FROM leaves l 
-            JOIN employees e
+            LEFT JOIN employees e
             ON l.employee = e.id
-            WHERE l.companyid = ${companyid} AND l.isactive = 1 AND l.employee = ${uid};
+            WHERE l.companyid = ${companyid} AND l.isactive = 1 AND (l.employee = ${uid} OR l.supervisor = ${uid}) ;
           `
       }
       
@@ -78,7 +78,7 @@ const Leaves = () => {
   }
 
   const fnHandleSearch = (e) => {
-    setFilteredLeaves(leaves.filter(lv => lv.fullname.toLowerCase().includes(e.toLowerCase())))
+    setFilteredLeaves(leaves.filter(lv => lv.fullname.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   const fnLeaveTypeLabel = (id) => {

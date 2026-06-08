@@ -45,6 +45,7 @@ const Orders = () => {
             o.assignto,
             -- Calculate total per order
             COALESCE(SUM(op.price * op.quantity), 0) AS order_total,
+            CONCAT(e.firstname, ' ', e.lastname) AS full_name_assigned,
 
             -- Aggregate products as JSON array
             COALESCE(
@@ -65,6 +66,8 @@ const Orders = () => {
             LEFT JOIN order_products op ON o.id = op.orderid
             LEFT JOIN products p ON op.productid = p.id
 
+            LEFT JOIN employees e ON e.id = o.assignto
+
             WHERE o.companyid = ${companyid} 
             GROUP BY o.id
             ORDER BY o.orderdate DESC;
@@ -83,7 +86,6 @@ const Orders = () => {
       const data = await fnGetDirectData('orders',sql);
       const data1 = await fnGetDirectData('orders',sql_orderskpis);
       if(data?.length > 0){
-        console.log(data)
         setTotalOrders(data1[0].total_orders)
         setTotalCompleted(data1[0].completed_orders)
         setTotalPending(data1[0].pending_orders)
@@ -135,7 +137,7 @@ const Orders = () => {
   }
 
   const fnHandleSearch = (e) => {
-    setFilteredOrders(orders.filter(p => p.customername.toLowerCase().includes(e.toLowerCase())))
+    setFilteredOrders(orders.filter(p => p.customername.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   return (
@@ -171,6 +173,7 @@ const Orders = () => {
                 <th>Date</th>
                 <th>Amount</th>
                 <th>Status</th>
+                <th>Assigned To</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -183,6 +186,7 @@ const Orders = () => {
                     <td>{order.orderdate?.replace('T', ' ')}</td>
                     <td>{Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(order.order_total)}</td>
                     <td><GetStatusBadge status={order.status} /> </td>
+                    <td>{order.full_name_assigned} </td>
                     <td>
                       <Tooltip placement="top" title={'View'}>
                         <button 

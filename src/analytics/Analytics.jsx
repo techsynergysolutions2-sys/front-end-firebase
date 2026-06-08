@@ -200,15 +200,12 @@ const Analytics = () => {
           setInventoryValue(res[0].total_value)
 
           let temp_data = mergeOrdersWithStatusFast(res5,order_status)
-          console.log(temp_data)
           setData(temp_data)
 
           setLineData(res2)
           setSalesOrders(res3)
           setRecentOrders(res4)
           setLineOrders(res6)
-
-          console.log(res2)
 
         } catch (error) {
         }

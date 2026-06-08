@@ -42,7 +42,7 @@ function Groups() {
   }
 
   const fnHandleSearch = (e) => {
-    setFilteredGroups(groups.filter(g => g.title.toLowerCase().includes(e.toLowerCase())))
+    setFilteredGroups(groups.filter(g => g.title.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   return (

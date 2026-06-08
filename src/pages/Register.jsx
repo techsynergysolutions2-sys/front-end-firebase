@@ -59,8 +59,6 @@ function Register() {
     }else if('companyname' in values){
       setCompany(values)
       var total = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format((values['employee_count'] * amou) * 1) 
-      console.log(values['employee_count'])
-      console.log(total)
       var itms = [
         {
           label: 'Employees',
@@ -78,8 +76,6 @@ function Register() {
         },
       ];
       setPaymentItems(itms)
-
-      console.log(itms)
 
       fnCreateAuth()
       .then( async(result) => {
@@ -207,13 +203,11 @@ function Register() {
 
   const createOrder = async () => {
     let ttl = (amou * 1) * 1
-    console.log(ttl)
     try {
         const res = await axios.post(`${url}/payments`, {
           employees: company['employee_count'], 
           action: 'orders'
         });
-        console.log(res.data.id)
         return res.data.id;
       } catch (err) {
         setErrorMessage("Could not create PayPal order");
@@ -222,14 +216,10 @@ function Register() {
   };
 
   const onApprove = async (data) => {
-    console.log('OnApprove Check 1')
-    console.log(data)
-    console.log('OnApprove Check 1')
     try {
       const res = await axios.post(
         `${url}/payments`,{action: 'capture',orderID: data.orderID, compid: compId,page: 'register'}
       );
-      console.log(res)
       if (res.data.status === "COMPLETED") {
         setSuccess(true);
         fnNavLogin()

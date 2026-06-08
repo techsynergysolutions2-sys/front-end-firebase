@@ -24,7 +24,6 @@ export default function TaskDetail() {
   const status = Task_Workflow_Status.find(t => t.id === task.status);
   const priority = task_priority.find(t => t.value === task.priority);
 
-  // console.log(task)
 
   useEffect(() => {
     fnGetAudit()
@@ -73,7 +72,6 @@ export default function TaskDetail() {
             if(task.id != undefined || task.id == ''){
                 const data = await fnGetDirectData('audit',sql);
                 setAudit(data)
-                console.log(data)
             }
             
         } catch (error) {

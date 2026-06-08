@@ -6,7 +6,7 @@ import {DeleteOutlined } from '@ant-design/icons';
 const Context = React.createContext({ name: 'Default' });
 let placement = 'topRight'
 
-function Team({fnShowTeam,projectId,showhide,invites,fnTeam}) {
+function Team({fnShowTeam,projectId,title,showhide,invites,fnTeam}) {
 
     const [employees, SetEmployees] = useState([])
     const [invitedUsers, setInvitedUsers] = useState(invites)
@@ -80,6 +80,7 @@ function Team({fnShowTeam,projectId,showhide,invites,fnTeam}) {
         let dt = {
             projectid: projectId ,
             userid: value,
+            title: title,
             createdby: sessionStorage.getItem('uid')
         }
 

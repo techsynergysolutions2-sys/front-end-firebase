@@ -1,6 +1,6 @@
 
 export default function KPIGrid({tasks}) {
-  console.log(tasks)
+  
   const pending = tasks?.filter(t => t.status == 1);
   const inprogress = tasks?.filter(t => t.status == 2);
   const Completed = tasks?.filter(t => t.status == 5);

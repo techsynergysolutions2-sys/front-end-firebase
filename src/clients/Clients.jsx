@@ -281,7 +281,7 @@ function Clients() {
   ]
 
   const fnHandleSearch = (e) => {
-    setFilteredClients(clients.filter(c => c.clientname.toLowerCase().includes(e.toLowerCase())))
+    setFilteredClients(clients.filter(c => c.clientname.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   return (

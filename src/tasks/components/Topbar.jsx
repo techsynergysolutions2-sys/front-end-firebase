@@ -2,10 +2,6 @@ import {Task_Workflow_Status} from '../../shared/shared'
 
 export default function Topbar({fnFilterTasksDrop}) {
 
-  // const fnFilterTasksDrop = (e) => {
-  //   console.log(e)
-  // }
-
   return (
     <div className="topbar">
       <h1>Tasks Overview</h1>

@@ -47,7 +47,6 @@ function Employee() {
       const data2 = await fnGetDirectData('groups',sql);
       setDepartments(data);
       setGroups(data2)
-      console.log(data2)
     } catch (error) {
       
     }

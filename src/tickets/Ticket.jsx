@@ -30,7 +30,6 @@ const Ticket = () => {
   var groupid = sessionStorage.getItem('groupid')
 
   useEffect(() => {
-    console.log(groupid)
     fnGetDataLoad()
   },[])
 
@@ -66,7 +65,6 @@ const Ticket = () => {
         const data3 = await fnGetDirectData('ticketnotes',sql);
         setShowNotes(true)
         setNotes(data3)
-        console.log(data3)
     }
     
     
@@ -293,26 +291,20 @@ const Ticket = () => {
                 </Col>
                 <Col span={2}></Col>
                 <Col span={11}>
-                    {
-                        groupid == 1 || groupid == 2 ? (
-                            <div className="form-group">
-                                <label>Assign to</label>
-                                <Form.Item name="assignto" 
-                                rules={[]}>
-                                <Select showSearch filterOption={(input, option) =>(option?.label ?? '').toLowerCase().includes(input.toLowerCase())} 
-                                allowClear={true} placeholder="Please select an employee" size='large' disabled={!fnHasPermission(7,5)}>
-                                    {
-                                    employees?.map((itm,key) => (
-                                        <Option value={itm.id} key={key}>{itm?.firstname} {itm?.lastname}</Option>
-                                    ))
-                                    }
-                                </Select>
-                                </Form.Item>
-                            </div>
-                        ):(
-                            null
-                        )
-                    }
+                    <div className="form-group">
+                        <label>Assign to</label>
+                        <Form.Item name="assignto" 
+                        rules={[]}>
+                        <Select showSearch filterOption={(input, option) =>(option?.label ?? '').toLowerCase().includes(input.toLowerCase())} 
+                        allowClear={true} placeholder="Please select an employee" size='large' disabled={!fnHasPermission(7,5)}>
+                            {
+                            employees?.map((itm,key) => (
+                                <Option value={itm.id} key={key}>{itm?.firstname} {itm?.lastname}</Option>
+                            ))
+                            }
+                        </Select>
+                        </Form.Item>
+                    </div>
                     
                 </Col>
             </Row>

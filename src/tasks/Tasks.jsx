@@ -59,7 +59,6 @@ export default function Tasks() {
         const data = await fnGetDirectData('tasks',sql);
         setTasks(data);
         setFilteredTask(data)
-        console.log(data)
         setLoading(!loading)
       } catch (error) {
       }
@@ -67,13 +66,11 @@ export default function Tasks() {
     
 
   const fnFilterTasksDrop = (e) => {
-    console.log(e)
     if(e == 0){
       setFilteredTask(tasks)
     }else{
       const temp = tasks?.filter(t => t.status == e);
       setFilteredTask(temp)
-      console.log(temp)
     }
     
   }

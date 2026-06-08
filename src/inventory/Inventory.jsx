@@ -65,8 +65,7 @@ const Inventory = () => {
   };
 
   const fnHandleSearch = (e) => {
-
-    setFilteredProducts(products.filter(p => p.title.toLowerCase().includes(e.toLowerCase())))
+    setFilteredProducts(products.filter(p => p.title.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   const handleClose = () => {

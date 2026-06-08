@@ -182,22 +182,18 @@ const fnCheckLogin = () => {
   var groupid = sessionStorage.getItem('groupid')
 
   if( uid == null ){
-    console.log('Check 1')
     return false
   }
 
   if(companyid === null){
-    console.log('Check 2')
     return false
   }
 
   if(permissions == null){
-    console.log('Check 3')
     return false
   }
 
   if(groupid == null){
-    console.log('Check 4')
     return false
   }
 

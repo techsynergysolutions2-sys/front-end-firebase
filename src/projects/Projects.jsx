@@ -84,8 +84,6 @@ export default function Projects() {
         const data = await fnGetDirectData('projects',sql);
         setProjects(data);
         setFilteredProjects(data)
-        console.log(data)
-        // setLoading(!loading)
       } catch (error) {
         
       }

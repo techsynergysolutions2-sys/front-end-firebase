@@ -55,7 +55,7 @@ function Employees() {
   };
 
   const fnHandleSearch = (e) => {
-    setFilteredEmployees(employees.filter(p => p.firstname.toLowerCase().includes(e.toLowerCase())))
+    setFilteredEmployees(employees.filter(p => p.firstname.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   return (

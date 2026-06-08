@@ -187,13 +187,6 @@ export default function CompanyProfile() {
       let add_space = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(temp2)
       let renew = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(temp)
 
-      console.log('================')
-      console.log(renew)
-      console.log(totalMonths)
-      console.log(monthsDiff)
-
-      
-      console.log('================')
       if(isModalOpenExpired){
         const res = await axios.post(`${url}/payments`, {
         employees: count,
@@ -206,7 +199,6 @@ export default function CompanyProfile() {
         employees: total,
         action: 'orders'
       });
-      console.log(res.data.id)
       return res.data.id;
       }
       

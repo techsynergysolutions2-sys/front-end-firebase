@@ -36,9 +36,9 @@ const Tickets = () => {
             SELECT t.*,CONCAT(e.firstname, ' ', e.lastname) AS fullname,
             CONCAT(ea.firstname, ' ', ea.lastname) AS assigned_fullname
             FROM tickets t
-            JOIN employees e
+            LEFT JOIN employees e
             ON t.createdby = e.id
-            JOIN employees ea
+            LEFT JOIN employees ea
             ON t.assignto = ea.id
             WHERE t.isactive = 1 AND t.companyid = ${companyid}
           `
@@ -47,12 +47,12 @@ const Tickets = () => {
             SELECT t.*,CONCAT(e.firstname, ' ', e.lastname) AS fullname,
             CONCAT(ea.firstname, ' ', ea.lastname) AS assigned_fullname
             FROM tickets t
-            JOIN employees e
+            LEFT JOIN employees e
             ON t.createdby = e.id
-            JOIN employees ea
+            LEFT JOIN employees ea
             ON t.assignto = ea.id
             WHERE t.isactive = 1 AND t.companyid = ${companyid}
-            AND (t.assignto = ${uid})
+            AND (t.assignto = ${uid} OR t.createdby = ${uid})
           `
       }
       
@@ -66,7 +66,6 @@ const Tickets = () => {
         setTotalUnassigned(temp_unassigned.length)
         setTickets(data);
         setFilteredTickets(data);
-        console.log(data)
       }
       } catch (error) {
       
@@ -90,7 +89,7 @@ const Tickets = () => {
   }
 
   const fnHandleSearch = (e) => {
-    setFilteredTickets(tickets.filter(t => t.customername.toLowerCase().includes(e.toLowerCase())))
+    setFilteredTickets(tickets.filter(t => t.customername.toLowerCase().includes(e.toLowerCase().trim())))
   }
 
   return (

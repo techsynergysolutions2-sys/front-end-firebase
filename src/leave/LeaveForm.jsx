@@ -61,9 +61,22 @@ const LeaveForm = () => {
   
     const fnSendData = async () => {
 
+      if(values['supervisor'] == values['employee']){
+        api.warning({
+                title: ``,
+                description: 'Please select a supervisor',
+                placement,duration: 2,
+                style: {
+                    background: "#e2e2e2ff"
+                },
+            });
+        return
+      }
+
       if(JSON.stringify(leave) === "{}" ){
           values['companyid'] = sessionStorage.getItem('companyid')
           values['createdby'] = sessionStorage.getItem('uid')
+          values['status'] = 1
           if(groupid != 1 && groupid != 2){
             values['status'] = 1
           }
@@ -177,15 +190,10 @@ const LeaveForm = () => {
                     <div className="form-group">
                     <label>Status</label>
                     <Form.Item name="status"
-                    rules={[
-                        {
-                        required: true,
-                        message: 'Please select a status!',
-                        },
-                    ]}
+                    rules={[]}
                     >
                     <Select showSearch filterOption={(input, option) =>(option?.label ?? '').toLowerCase().includes(input.toLowerCase())} 
-                    allowClear={true} placeholder="Please select a status" size='large' defaultValue={1}>
+                    allowClear={true} placeholder="Please select a status" size='large' disabled={ leave?.supervisor == sessionStorage.getItem('uid') ? false : true}>
                         {
                         leave_status?.map((itm,key) => (
                             <Option value={itm.id} key={key}>{itm.label}</Option>

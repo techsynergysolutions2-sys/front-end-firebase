@@ -132,7 +132,7 @@ export default function PermissionsPage() {
     
     const temp_perm = permissions.find(t => t.pageid === item.id);
     let arr = temp_perm?.actions.split(',').map(Number);
-    // console.log(temp_perm)
+    
     return(
     <div key={item.name} className="perm-row">
       <div className="perm-title">{item.name}</div>
