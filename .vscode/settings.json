@@ -58,6 +58,60 @@
                     "foreground": "rgba(255, 0, 0, 0)",
                     "background": "rgba(0, 0, 0, 0.008)"
                 }
+            },
+            {
+                "scope": [
+                    "comment"
+                ],
+                "settings": {
+                    "foreground": "rgba(0, 128, 0, 0)",
+                    "background": "rgba(0, 0, 0, 0.008)"
+                }
+            },
+            {
+                "scope": [
+                    "variable"
+                ],
+                "settings": {
+                    "foreground": "rgba(0, 0, 0, 0)",
+                    "background": "rgba(0, 0, 0, 0.008)"
+                }
+            },
+            {
+                "scope": [
+                    "constant.numeric"
+                ],
+                "settings": {
+                    "foreground": "rgba(128, 0, 128, 0)",
+                    "background": "rgba(0, 0, 0, 0.008)"
+                }
+            },
+            {
+                "scope": [
+                    "keyword.operator"
+                ],
+                "settings": {
+                    "foreground": "rgba(0, 0, 0, 0.008)",
+                    "background": "rgba(0, 0, 0, 0.008)"
+                }
+            },
+            {
+                "scope": [
+                    "string"
+                ],
+                "settings": {
+                    "foreground": "rgba(21, 21, 163, 0)",
+                    "background": "rgba(0, 0, 0, 0.008)"
+                }
+            },
+            {
+                "scope": [
+                    "keyword"
+                ],
+                "settings": {
+                    "foreground": "rgba(255, 0, 0, 0)",
+                    "background": "rgba(0, 0, 0, 0.008)"
+                }
             }
         ]
     },

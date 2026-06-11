@@ -82,8 +82,8 @@ export const host_url = 'https://eben-crm.com'
 // export const url = 'http://127.0.0.1:5001/crm-solutions-34e5f/us-central1/api'
 // export const host_url = 'http://localhost:3000'
 
-// export const amou = 4.99
-export const amou = 1
+export const amou = 4.99
+// export const amou = 1
 
 
 export const Task_Workflow_Status = [
