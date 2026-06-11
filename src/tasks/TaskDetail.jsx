@@ -99,7 +99,7 @@ export default function TaskDetail() {
           <div className="task_details_header">
             <h1>{task.tasttitle}</h1>
             <div className="task_details_meta">
-              {task.title} • Due {task.duedate?.replace('T', ' ')} • {priority?.label} Priority • 
+              {task.title} • Due {task.duedate?.substring(0,16).replace('T', ' ')} • {priority?.label} Priority • 
               {
                 fnHasPermission(5,3)? (
                   <span style={{float: 'right', cursor: 'pointer'}} onClick={() => fnShowAudit(true)}>Edit</span>

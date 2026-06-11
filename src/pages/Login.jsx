@@ -189,6 +189,9 @@ export default function Login() {
             <span style={{fontSize: 15, cursor: 'pointer'}} onClick={() => fnRegisterNavigate()}>Create Account</span>
             </div>
             <div className="login-footer">
+            <span style={{cursor: 'pointer'}}><a href='https://eben-crm.com/privacypolicy' style={{textDecoration: 'none', color: 'inherit'}}>Privacy Policy</a></span>
+            <br/>
+            <br/>
             <span>© {new Date().getFullYear()} Eben CRM</span>
             </div>
         </div>

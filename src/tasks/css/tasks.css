@@ -110,8 +110,8 @@
 
 /* Card */
 .tasks .card {
-    max-width: 320px !important;
-    max-height: 220px !important;
+    /* max-width: 320px !important;
+    max-height: 220px !important; */
 }
 .card {
     backdrop-filter: blur(16px);

@@ -23,7 +23,7 @@ function Client() {
     }
 
      useEffect(() => {
-    
+          console.log(client)
       },[])
 
     const onFinish = (values) => {

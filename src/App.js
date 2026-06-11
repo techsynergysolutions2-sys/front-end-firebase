@@ -31,6 +31,7 @@ import Department from './department/Department'
 import Departments from './department/Departments'
 import CompanyProfile from './company/CompanyProfile'
 import About from './about/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route Component={Login} path="/login"/>
+          <Route Component={PrivacyPolicy} path="/privacypolicy"/>
           <Route Component={Register} path="/register"/>
           <Route Component={About} path="/crm"/>
           <Route Component={Home} path="/">

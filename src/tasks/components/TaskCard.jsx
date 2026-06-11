@@ -16,7 +16,7 @@ export default function TaskCard({ task }) {
     <div className="card" onClick={() => fnNavTask()}>
       <h3 style={{whiteSpace: 'nowrap', overflow: 'hidden', width: '100%', textOverflow: 'ellipsis'}}>Junior Magwaxaza {task.title}</h3>
       <div className="task_meta">Project: {task.project_title}</div>
-      <div className="task_meta">Due: {task.duedate?.replace('T', ' ')}</div>
+      <div className="task_meta">Due: {task.duedate?.substring(0,16).replace('T', ' ')}</div>
       <div className="task_meta">Created by: {task.created_by}</div>
 
       <span

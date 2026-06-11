@@ -283,8 +283,8 @@ export default function About() {
 
             <FeatureCard
               icon={<Users />}
-              title="Customer Management"
-              desc="Centralize customer communication and relationship tracking."
+              title="Clients Management"
+              desc="Centralize client communication and relationship tracking."
             />
 
             <FeatureCard
@@ -448,6 +448,11 @@ export default function About() {
                   <PricingFeature text="Sales & invoicing" />
                   <PricingFeature text="Analytics" />
                   <PricingFeature text="Role permissions" />
+                  <PricingFeature text="Tasks" />
+                  <PricingFeature text="Tickets" />
+                  <PricingFeature text="Employee Leaves" />
+                  <PricingFeature text="Android Application (Apple coming soon)" />
+                  <PricingFeature text="Everything included in one price" />
                 </div>
 
                 <button
@@ -495,10 +500,12 @@ export default function About() {
                 Get Started
               </button>
 
-              <button className="btn btn-outline-light btn-lg px-5 rounded-4">
+              {/* <button className="btn btn-outline-light btn-lg px-5 rounded-4">
                 Contact Sales
-              </button>
+              </button> */}
             </div>
+            <br/>
+             Email: support@ebencrm.com
           </div>
         </div>
       </section>
