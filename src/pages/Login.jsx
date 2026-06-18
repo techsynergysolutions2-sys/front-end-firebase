@@ -152,7 +152,7 @@ export default function Login() {
         <div className="login-layout">
         <div className="login-card">
             <div className="login-header">
-            <h2>Eben CRM</h2>
+            <h2 style={{cursor: 'pointer'}} onClick={() => navigate('/')}>Eben CRM</h2>
             <p>Sign in to continue</p>
             </div>
 

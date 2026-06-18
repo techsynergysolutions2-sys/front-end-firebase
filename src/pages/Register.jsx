@@ -233,7 +233,10 @@ function Register() {
   return (
     <Row>
       <div style={{position: 'fixed', top: 15, left: 15, zIndex: 999}}>
-        <span style={{fontSize: 17, cursor: 'pointer', fontWeight: 600}} onClick={() => fnNavLogin()}><LeftOutlined style={{fontSize: 14}}/>Sign In</span>
+        {/* <span style={{fontSize: 17, cursor: 'pointer', fontWeight: 600}} onClick={() => fnNavLogin()}><LeftOutlined style={{fontSize: 14}}/>Sign In</span> */}
+        <Button type="primary" htmlType="submit" style={{fontSize: 17, cursor: 'pointer', fontWeight: 600}} onClick={() => fnNavLogin()}>
+          Sign In
+        </Button>
       </div>
       <Col span={24}>
         <Row justify="center" style={{marginTop: 40}}>

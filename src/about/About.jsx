@@ -129,8 +129,8 @@ export default function About() {
               </li>
 
               <li className="nav-item">
-                <button className="btn btn-light px-4 rounded-4 fw-semibold" onClick={() => navigate('/register')}>
-                  Get Started
+                <button className="btn btn-light px-4 rounded-4 fw-semibold" onClick={() => navigate('/login')}>
+                  Login
                 </button>
               </li>
             </ul>
