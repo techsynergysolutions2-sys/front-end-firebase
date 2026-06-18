@@ -79,7 +79,7 @@ export default function Login() {
                         });
                     }else{
                             sessionStorage.setItem('permissions',0)
-                            navigate('/companyprofile')
+                            navigate('/crm/companyprofile')
                         }
                     
                 }else{
@@ -95,7 +95,7 @@ export default function Login() {
                     try {
                     const data = await fnGetDirectData('permissions',sql);
                     sessionStorage.setItem('permissions',JSON.stringify(data))
-                    navigate('/tasks')
+                    navigate('/crm/tasks')
                     } catch (error) {
                     
                     }

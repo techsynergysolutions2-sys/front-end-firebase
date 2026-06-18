@@ -33,7 +33,7 @@ export default function Sidebar() {
               <div className="menu-title">Sales</div>
               {
                 fnConnectNavigation(2)? (
-                  <NavLink to="/inventory" end className="menu-item">
+                  <NavLink to="/crm/inventory" end className="menu-item">
                     Inventory
                   </NavLink>
                 ):(null)
@@ -41,7 +41,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(3)? (
-                  <NavLink to="/orders" className="menu-item">
+                  <NavLink to="/crm/orders" className="menu-item">
                     Orders
                   </NavLink>
                 ):(null)
@@ -49,7 +49,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(4)? (
-                  <NavLink to="/analytics" className="menu-item">
+                  <NavLink to="/crm/analytics" className="menu-item">
                   Analytics
                 </NavLink>
                 ):(null)
@@ -66,7 +66,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(5)? (
-                  <NavLink to="/tasks" className="menu-item">
+                  <NavLink to="/crm/tasks" className="menu-item">
                     Tasks
                   </NavLink>
                 ):(null)
@@ -74,7 +74,7 @@ export default function Sidebar() {
               
               {
                 fnConnectNavigation(6)? (
-                  <NavLink to="/projects" className="menu-item">
+                  <NavLink to="/crm/projects" className="menu-item">
                     Projects
                   </NavLink>
                 ):(null)
@@ -82,7 +82,7 @@ export default function Sidebar() {
               
               {
                 fnConnectNavigation(7)? (
-                  <NavLink to="/tickets" className="menu-item">
+                  <NavLink to="/crm/tickets" className="menu-item">
                     Tickets
                   </NavLink>
                 ):(null)
@@ -90,7 +90,7 @@ export default function Sidebar() {
               
               {
                 fnConnectNavigation(8)? (
-                  <NavLink to="/leaves" className="menu-item">
+                  <NavLink to="/crm/leaves" className="menu-item">
                     Leave
                   </NavLink>
                 ):(null)
@@ -107,7 +107,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(9)? (
-                  <NavLink to="/employees" className="menu-item">
+                  <NavLink to="/crm/employees" className="menu-item">
                     Employees
                   </NavLink>
                 ):(null)
@@ -115,7 +115,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(10)? (
-                  <NavLink to="/clients" className="menu-item">
+                  <NavLink to="/crm/clients" className="menu-item">
                     Clients
                   </NavLink>
                 ):(null)
@@ -123,7 +123,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(11)? (
-                  <NavLink to="/departments" className="menu-item">
+                  <NavLink to="/crm/departments" className="menu-item">
                     Departments
                   </NavLink>
                 ):(null)
@@ -131,7 +131,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(12)? (
-                  <NavLink to="/groups" className="menu-item">
+                  <NavLink to="/crm/groups" className="menu-item">
                     Groups
                   </NavLink>
                 ):(null)
@@ -139,7 +139,7 @@ export default function Sidebar() {
               
               {
                 fnConnectNavigation(13)? (
-                  <NavLink to="/permissionslist" className="menu-item">
+                  <NavLink to="/crm/permissionslist" className="menu-item">
                     Permissions
                   </NavLink>
                 ):(null)
@@ -147,7 +147,7 @@ export default function Sidebar() {
 
               {
                 fnConnectNavigation(14)? (
-                  <NavLink to="/companyprofile" className="menu-item">
+                  <NavLink to="/crm/companyprofile" className="menu-item">
                     Company Profile
                   </NavLink>
                 ):(null)
@@ -159,7 +159,7 @@ export default function Sidebar() {
 
         <div className="menu-group">
 
-          <NavLink to="/profile" end className="menu-item">
+          <NavLink to="/crm/profile" end className="menu-item">
             Profile
           </NavLink>
 
