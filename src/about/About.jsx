@@ -451,7 +451,7 @@ export default function About() {
                   <PricingFeature text="Tasks" />
                   <PricingFeature text="Tickets" />
                   <PricingFeature text="Employee Leaves" />
-                  <PricingFeature text="Android Application (Apple coming soon)" />
+                  <PricingFeature text="EbenCRM Android Application (Apple coming soon)" />
                   <PricingFeature text="Everything included in one price" />
                 </div>
 
