@@ -118,7 +118,7 @@ function Register() {
       const data = await fnCreateData('employees', 'employees', member, 'new');
 
       // Check if data was created successfully
-      if (data.insertId != null && data.insertId !== undefined) {
+      if (data.insertId) {
         setCompanyCreated(true);
         setCompId(data2.insertId);
         // fnGoBack()
