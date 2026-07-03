@@ -62,7 +62,7 @@ function Register() {
       setCurrent(current + 1);
     }else if('companyname' in values){
       setCompany(values)
-      var total = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format((values['employee_count'] * amou) * 1) 
+      var total = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format((values['employee_count'] * amou) * 12) 
       var itms = [
         {
           label: 'Employees',
@@ -74,7 +74,7 @@ function Register() {
           children: Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(amou) ,
         },
         {
-          label: 'Total',
+          label: 'Annual Total',
           span: 'filled', // span = 3
           children: `${total}`,
         },
