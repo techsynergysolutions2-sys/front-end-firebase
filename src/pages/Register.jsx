@@ -131,6 +131,7 @@ function Register() {
       }
 
     } catch (error) {
+      console.log(error)
       api.warning({
           title: ``,
           description: 'Admin email already exist. Please use a different email',
