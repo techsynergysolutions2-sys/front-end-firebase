@@ -51,7 +51,7 @@ function PermissionsList() {
   }
 
   return (
-    <Row style={{padding: 15, height: '100vh', backgroundColor: '#fff',overflowY: 'scroll',scrollbarWidth: 'none'}}>
+    <Row style={{padding: 15, height: '98%', backgroundColor: '#fff',overflowY: 'scroll',scrollbarWidth: 'none'}}>
 
       <div className="container">
         <h1 className="dashboard-title">Permissions</h1>

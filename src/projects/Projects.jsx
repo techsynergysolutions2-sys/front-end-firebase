@@ -105,7 +105,7 @@ export default function Projects() {
   }
 
   return (
-    <div className="projects-layout">
+    <div className="projects-layout" style={{width: '100%', height: '98%',overflowY: 'scroll',scrollbarWidth: 'none'}}>
 
       <NewProject pageid={pageid} fetchClients={fetchClients} showhide={newRecord} fnShowProjectInfor={fnShowProjectInfor} projectinfor={{}}/>
 

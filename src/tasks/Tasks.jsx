@@ -85,7 +85,7 @@ export default function Tasks() {
   }
 
   return ( 
-    <div className="tasks">
+    <div className="tasks" style={{width: '100%', height: '98%',overflowY: 'scroll',scrollbarWidth: 'none'}}>
 
       {/* New Record */}
       <NewTask pageid={pageid} showhide={newRecord} fnShowAudit={fnShowAudit} fnAddTask={fnAddTask} taskinfor={{}}/>

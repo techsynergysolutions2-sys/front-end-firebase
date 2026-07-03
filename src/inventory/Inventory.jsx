@@ -76,7 +76,7 @@ const Inventory = () => {
     <>
       {
         loading ? (
-          <Skeleton active style={{marginTop: 20, marginLeft: 20}}/>
+          <Skeleton active style={{marginTop: 20, marginLeft: 20}} />
         ):(
           <div className="all-products-page" style={{width: '100%', height: '98%',overflowY: 'scroll',scrollbarWidth: 'none'}}>
             <div className="container">
