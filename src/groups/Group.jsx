@@ -19,7 +19,7 @@ function Group() {
     const [api, contextHolder] = notification.useNotification();
 
     const fnGoBack = () => {
-        navigate('/groups')
+        navigate('/crm/groups')
     }
 
      useEffect(() => {

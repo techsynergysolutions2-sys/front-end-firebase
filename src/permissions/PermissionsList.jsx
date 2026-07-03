@@ -41,7 +41,7 @@ function PermissionsList() {
     };
 
   const fnAddEditDepartment = (record) => {
-    navigate("/permissions",{
+    navigate("/crm/permissions",{
       state: record
     })
   }

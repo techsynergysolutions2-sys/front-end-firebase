@@ -34,7 +34,7 @@ const Ticket = () => {
   },[])
 
   const fnGoBack = () => {
-    navigate('/tickets')
+    navigate('/crm/tickets')
   }
 
   const fnGetDataLoad = async () => {

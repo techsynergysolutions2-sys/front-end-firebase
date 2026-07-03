@@ -20,7 +20,7 @@ const Orders = () => {
   const ordersPerPage = 8;
 
   const fnNavNewOrder = (record) => {
-    navigate("/neworder",{
+    navigate("/crm/neworder",{
       state: record
     })
   }

@@ -46,7 +46,7 @@ const Product = () => {
 
 
     const fnGoBack = () => {
-        navigate('/inventory')
+        navigate('/crm/inventory')
     }
 
     useEffect(() => {

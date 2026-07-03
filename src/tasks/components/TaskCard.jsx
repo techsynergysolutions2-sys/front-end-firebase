@@ -7,7 +7,7 @@ export default function TaskCard({ task }) {
 
   const navigate = useNavigate()
   const fnNavTask = () => {
-    navigate("/taskdetail",{
+    navigate("/crm/taskdetail",{
       state: task
     })
   }

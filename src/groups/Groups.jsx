@@ -36,7 +36,7 @@ function Groups() {
     };
 
   const fnAddEditGroup = (record) => {
-    navigate("/group",{
+    navigate("/crm/group",{
       state: record
     })
   }

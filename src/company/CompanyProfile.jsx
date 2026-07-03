@@ -188,16 +188,21 @@ export default function CompanyProfile() {
       let renew = Intl.NumberFormat(undefined,{style: 'currency', currency: 'USD'}).format(temp)
 
       if(isModalOpenExpired){
-        const res = await axios.post(`${url}/payments`, {
+        const res = await axios.post(`${url}/space`, {
         employees: count,
-        action: 'orders'
+        action: 'orders',
+        space_type: 'expired'
       });
       return res.data.id;
       }else{
         let total = totalMonths * numSpace
-        const res = await axios.post(`${url}/payments`, {
+        const res = await axios.post(`${url}/space`, {
         employees: total,
-        action: 'orders'
+        action: 'orders',
+        space_type: 'space',
+        numSpace: numSpace,
+        count: count,
+        originalDate: company['expirydate']
       });
       return res.data.id;
       }

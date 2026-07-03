@@ -44,7 +44,7 @@ function Clients() {
       createddate: record.createddate,
       isactive: record.isactive
   }
-    navigate("/client",{
+    navigate("/crm/client",{
       state: temp
     })
   }

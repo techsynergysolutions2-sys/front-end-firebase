@@ -25,7 +25,7 @@
 //   },[])
 
 //   const fnGoBack = () => {
-//     navigate('/permissionslist')
+//     navigate('/crm/permissionslist')
 //   }
 
 //   const fetchDepartment = async () => {

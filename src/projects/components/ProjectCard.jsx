@@ -8,7 +8,7 @@ export default function ProjectCard({ project }) {
 
   const navigate = useNavigate()
   const fnNavTask = () => {
-    navigate("/projectdetail",{
+    navigate("/crm/projectdetail",{
       state: project
     })
   }

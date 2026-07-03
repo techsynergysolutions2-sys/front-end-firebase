@@ -311,7 +311,7 @@ export default function PermissionsPage() {
   }
 
   const fnGoBack = () => {
-    navigate('/permissionslist')
+    navigate('/crm/permissionslist')
   }
 
   const contextValue = useMemo(() => ({ name: 'Ant Design' }), []);

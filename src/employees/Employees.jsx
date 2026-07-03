@@ -10,7 +10,7 @@ function Employees() {
   const navigate = useNavigate()
 
   const fnAddEditEmployee = (record) => {
-    navigate("/employee",{
+    navigate("/crm/employee",{
       state: record
     })
   }

@@ -18,7 +18,7 @@ const Tickets = () => {
   var groupid = sessionStorage.getItem('groupid')
 
   const fnNavNewTicket = (record) => {
-    navigate("/ticket",{
+    navigate("/crm/ticket",{
       state: record
     })
   }

@@ -147,7 +147,7 @@ function Employee() {
   };
 
   const fnGoBack = () => {
-    navigate('/employees')
+    navigate('/crm/employees')
   }
 
   const searchInput = useRef(null);

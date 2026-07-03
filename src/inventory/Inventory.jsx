@@ -45,13 +45,13 @@ const Inventory = () => {
     };
 
     const fnNavProduct = (record) => {
-        navigate('/product',{
+        navigate('/crm/product',{
             state: record
         })
     }
 
   const handleEdit = (product) => {
-    navigate('/product',{
+    navigate('/crm/product',{
         state: product
     })
   };

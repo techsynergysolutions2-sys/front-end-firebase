@@ -29,7 +29,7 @@ function Departments() {
     };
 
   const fnAddEditDepartment = (record) => {
-    navigate("/department",{
+    navigate("/crm/department",{
       state: record
     })
   }

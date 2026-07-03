@@ -20,7 +20,7 @@ function Department() {
     const [api, contextHolder] = notification.useNotification();
 
     const fnGoBack = () => {
-        navigate('/departments')
+        navigate('/crm/departments')
     }
 
      useEffect(() => {

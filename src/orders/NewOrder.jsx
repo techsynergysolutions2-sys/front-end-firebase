@@ -38,7 +38,7 @@ const CreateOrder = () => {
   },[])
 
   const fnGoBack = () => {
-    navigate('/orders')
+    navigate('/crm/orders')
   }
 
   const fnGetDataLoad = async () => {

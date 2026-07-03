@@ -19,7 +19,7 @@ function Client() {
     const [api, contextHolder] = notification.useNotification();
 
     const fnGoBack = () => {
-        navigate('/clients')
+        navigate('/crm/clients')
     }
 
      useEffect(() => {

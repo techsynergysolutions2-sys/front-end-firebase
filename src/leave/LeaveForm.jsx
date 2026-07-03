@@ -37,7 +37,7 @@ const LeaveForm = () => {
 
   const fnGoBack = () => {
     
-    navigate('/leaves')
+    navigate('/crm/leaves')
   }
 
   const fnGetDataLoad = async () => {

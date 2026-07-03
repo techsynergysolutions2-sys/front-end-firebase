@@ -48,7 +48,7 @@ const ProductCard = ({ product,loaddata }) => {
   const stockStatus = getStockStatus(product.stock);
 
   const fnNavProduct = (record) => {
-        navigate('/product',{
+        navigate('/crm/product',{
             state: record
         })
   }

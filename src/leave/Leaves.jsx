@@ -14,7 +14,7 @@ const Leaves = () => {
   const ordersPerPage = 8;
 
   const fnNavNewLeave = (record) => {
-    navigate("/leaveform",{
+    navigate("/crm/leaveform",{
       state: record
     })
   }
