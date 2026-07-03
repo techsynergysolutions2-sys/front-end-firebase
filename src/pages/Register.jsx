@@ -81,7 +81,7 @@ function Register() {
       ];
       setPaymentItems(itms)
 
-      fnCreateAuth()
+      fnCreateAuth(values)
       .then( async(result) => {
         setCurrent(current + 1);
       })
@@ -100,14 +100,13 @@ function Register() {
     setCurrent(current - 1);
   };
 
- const fnCreateAuth = () => {
+ const fnCreateAuth = (values) => {
   return new Promise(async (resolve, reject) => {
     setLoading(true);
 
     try {
 
-      const data2 = await fnCreateData('company', 'companies', company, 'new');
-
+      const data2 = await fnCreateData('company', 'companies', values, 'new');
       if (!data2?.insertId) {
         throw new Error('Company creation failed');
       }
@@ -131,7 +130,6 @@ function Register() {
       }
 
     } catch (error) {
-      console.log(error)
       api.warning({
           title: ``,
           description: 'Admin email already exist. Please use a different email',
@@ -493,11 +491,11 @@ function Register() {
                             Next
                           </Button>
                         )}
-                        {current === steps.length - 1 && (
+                        {/* {current === steps.length - 1 && (
                           <Button type="primary" htmlType="submit" onClick={() => fnCreateAuth()}>
                             Pay
                           </Button>
-                        )}
+                        )} */}
                         {current > 0 && (
                           <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
                             Previous
