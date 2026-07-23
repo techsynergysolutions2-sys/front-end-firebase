@@ -83,10 +83,15 @@ export default function About() {
                 height: 42,
                 borderRadius: 14,
                 background:
-                  "linear-gradient(135deg, #3b82f6, #9333ea)",
+                  "linear-gradient(135deg, #6da3fa, #a864e8)",
               }}
             >
-              <Layers3 size={20} />
+              {/* <Layers3 size={20} /> */}
+              <img
+                  src="https://firebasestorage.googleapis.com/v0/b/crm-solutions-34e5f.firebasestorage.app/o/Logo.png?alt=media&token=256064a5-ba6a-4a42-837f-368fb4fde59d"
+                  width={30}
+                />
+                
             </div>
 
             <div>
