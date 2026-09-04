@@ -274,14 +274,10 @@ export const ticket_status = [
   },
   {
     id: 4,
-    label: 'On Hold'
-  },
-  {
-    id: 5,
     label: 'Resolved'
   },
   {
-    id: 4,
+    id: 5,
     label: 'Closed'
   },
 ]
