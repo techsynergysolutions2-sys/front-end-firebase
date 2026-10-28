@@ -240,7 +240,7 @@ function Register() {
             <Steps current={current} items={items} style={{width: 800}}/>
           </Row>
 
-          <Row justify="center" style={{marginTop: 40, marginBottom: 40}}>
+          {/* <Row justify="center" style={{marginTop: 40, marginBottom: 40}}>
             {
               current === 0  && (
                 <Card style={{ width: 600, boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)" }}>
@@ -323,12 +323,6 @@ function Register() {
                         <Input.Password style={{ width: '150%'}} size='large'/>
                       </Form.Item>
                     </div>
-
-                    {/* <Form.Item label="Profile picture">
-                      <Upload {...props}  maxCount={1} >
-                        <Button icon={<UploadOutlined />}>Upload png, jpg only</Button>
-                      </Upload>
-                    </Form.Item> */}
 
                     <Form.Item label={null}>
                     <Row justify="center">
@@ -440,11 +434,6 @@ function Register() {
                             Submit
                           </Button>
                         )}
-                        {/* {current === steps.length - 1 && (
-                          <Button type="primary" htmlType="submit" onClick={() => message.success('Processing complete!')}>
-                            Done
-                          </Button>
-                        )} */}
                         {current > 0 && (
                           <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
                             Previous
@@ -469,7 +458,6 @@ function Register() {
                   <Typography style={{textAlign: 'center', fontFamily: "'Poppins', sans-serif", fontSize: 28, fontWeight: 600, marginBottom: 15}}>Payment</Typography>
                   
                   <Descriptions bordered title="Payment" items={paymentitems} />
-                  {/* <Button onClick={() => createOrder()}>Testing</Button> */}
                   <PayPalScriptProvider
                     options={{
                       "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
@@ -491,11 +479,6 @@ function Register() {
                             Next
                           </Button>
                         )}
-                        {/* {current === steps.length - 1 && (
-                          <Button type="primary" htmlType="submit" onClick={() => fnCreateAuth()}>
-                            Pay
-                          </Button>
-                        )} */}
                         {current > 0 && (
                           <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
                             Previous
@@ -504,13 +487,12 @@ function Register() {
                       </div>
                     </Row>
                     <Row justify="center" align="middle">
-                      {/* <Spin tip="Loading" spinning={loading} size="large" style={{marginTop: 20}}></Spin> */}
                     </Row>
                 </Card>
               )
             }
             
-          </Row>
+          </Row> */}
 
           {/* <Row justify="center" style={{marginTop: 20, marginBottom: 20}}>
             <Button type="primary" onClick={() => fnNavLogin()}>
